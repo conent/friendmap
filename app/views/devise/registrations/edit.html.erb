@@ -1,0 +1,60 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Friend List
+        </a>
+      </h3>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        Qui ci sarà una bellissima lista di amici.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          <h3>Edit My Account</h3>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'form-horizontal' }) do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.input :name, label: "New Name", autocomplete: "off" %>
+        <%= f.input :surname, label: "New Surname", autocomplete: "off" %>
+        <%= f.input :email %>
+        <%= f.input :password, label: "New Password", autocomplete: "off" %>
+        <%= f.input :password_confirmation, label: "New Password Confirmation", autocomplete: "off" %>
+        <%= f.input :current_password %>
+
+        <div class="form-actions">
+          <%= f.submit "Update", class: "btn btn-primary"%>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Cancel my account
+        </a>
+      </h3>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+
+
+        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+      </div>
+    </div>
+  </div>
+</div>
