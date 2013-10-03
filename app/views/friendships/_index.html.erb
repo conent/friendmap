@@ -8,7 +8,7 @@
     <th></th>
   </tr>
 
-<% @friendships.each do |friendship| %>
+<% current_friend.friendships.all.each do |friendship| %>
   <tr>
     <td><%= Friend.find_by_id(friendship.otherfriend).name %></td>
     <td><%= link_to 'Show', friendship %></td>
@@ -21,3 +21,6 @@
 <br />
 
 <%= link_to 'New Friendship', new_friendship_path %>
+
+
+<!-- ricordarsi di togliere _ dal titolo -->
