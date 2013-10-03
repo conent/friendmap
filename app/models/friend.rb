@@ -8,4 +8,6 @@ class Friend < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, 
   					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude
   # attr_accessible :title, :body
+
+  has_many :friendships, :dependent => :destroy
 end

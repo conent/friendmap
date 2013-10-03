@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002135522) do
+ActiveRecord::Schema.define(:version => 20131002155213) do
 
   create_table "friends", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -38,5 +38,14 @@ ActiveRecord::Schema.define(:version => 20131002135522) do
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true
   add_index "friends", ["reset_password_token"], :name => "index_friends_on_reset_password_token", :unique => true
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "otherfriend"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "friend_id"
+  end
+
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
 
 end

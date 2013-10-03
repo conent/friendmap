@@ -1,5 +1,8 @@
 Friendmap::Application.routes.draw do
 
+  resources :friendships
+
+
   devise_for :friends
 
   get 'about'=> 'pages#about'
