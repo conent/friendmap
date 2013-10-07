@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Otherfriend:</b>
-  <%= @friendship.otherfriend %>
-</p>
+<table class="table table-striped">
+  <tr>
+    <th>Friend name</th>
+    <th>Is online</th>
+    <th>Friend email</th>
+    <th>Last time online</th>
+  </tr>
+  <tr>
+    <td><%= Friend.find(@friendship.otherfriend).name %></th>
+    <td><%= Friend.find(@friendship.otherfriend).isonline %></th>
+    <td><%= Friend.find(@friendship.otherfriend).email %></th>
+    <td><%= Friend.find(@friendship.otherfriend).lastseen %></th>
+  </tr>
 
-
-<%= link_to 'Edit', edit_friendship_path(@friendship) %> |
+<!--<%= link_to 'Edit', edit_friendship_path(@friendship) %> | -->
 <%= link_to 'Back', edit_friend_registration_path %>

@@ -1,15 +1,17 @@
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">
+      <h2 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
           Friend List
         </a>
-      </h3>
+      </h2>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
       <div id="myFriendList" class="panel-body">
        <%= render "friendships/index" %>
+
+       <!-- aggiungere qui l'index per le friend requests se > 0  -->
 
       </div>
     </div>

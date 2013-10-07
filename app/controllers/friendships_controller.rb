@@ -3,7 +3,6 @@ class FriendshipsController < ApplicationController
   # GET /friendships
   # GET /friendships.json
   def index
-    @friends= Friend.all
     @friendships = current_friend.friendships.all
 
     respond_to do |format|

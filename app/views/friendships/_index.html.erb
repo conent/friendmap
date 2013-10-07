@@ -1,8 +1,7 @@
-<h1>Listing friendships</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>Otherfriend</th>
+    <th>Friend name</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,9 +17,8 @@
 <% end %>
 </table>
 
-<br />
+<p class="pull-right">
+<%= link_to 'Ask Friendship', new_friend_request_path %>
+</p>
 
-<%= link_to 'New Friendship', new_friendship_path %>
-
-
-<!-- ricordarsi di togliere _ dal titolo -->
+<!--link_to Ask Friendship, new_friendship_path-->

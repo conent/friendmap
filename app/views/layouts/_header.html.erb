@@ -21,13 +21,22 @@
                         </li>                            
                     </ul>
                     <ul class="nav pull-right">
-                       <div class="btn-group btn-group-xs">
-                            <% if !friend_signed_in? %>
-                             <li><%= link_to 'Login',  new_friend_session_path, class: "btn btn-small" %></li>
-                            <% else %>
+                      <% if !friend_signed_in? %>
+                         <div class="btn-group btn-group-xs">
+                            <li><%= link_to 'Login',  new_friend_session_path, class: "btn btn-small" %></li>
+                         </div>
+                         <div class="btn-group btn-group-xs">
+                            <li><%= link_to "Sign Up Now!", new_friend_registration_path, class: "btn btn-primary btn-small" %></li>
+                         </div>
+                      <% else %>
+                         <div class="btn-group btn-group-xs">
+                            <li><%= link_to 'requests',  friend_requests_path, class: "btn btn-small" %></li>
+                         </div>
+                         <div class="btn-group btn-group-xs">
                              <li><%= link_to 'Logout',  destroy_friend_session_path, class: "btn btn-small btn-quit", method: :delete %></li>
+                         </div>
                             <% end %>
-                        </div>
+                        
                     </ul>
                 </div>
             </div>

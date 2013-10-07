@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002155213) do
+ActiveRecord::Schema.define(:version => 20131007104748) do
+
 
   create_table "friends", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -47,5 +48,14 @@ ActiveRecord::Schema.define(:version => 20131002155213) do
   end
 
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
+
+  create_table "friend_requests", :force => true do |t|
+    t.integer  "otherfriend"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "friend_id"
+  end
+
+  add_index "friend_requests", ["friend_id"], :name => "index_friend_requests_on_friend_id"
 
 end

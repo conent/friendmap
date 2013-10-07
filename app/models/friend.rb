@@ -10,4 +10,5 @@ class Friend < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :friendships, :dependent => :destroy
+  has_many :friend_requests, :dependent => :destroy
 end

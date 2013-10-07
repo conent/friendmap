@@ -8,10 +8,10 @@ namespace :db do
       password = "password"
       puts "[DEBUG] creating user #{n+1} of 10 name= "<<name
       Friend.create!( name: name,
-                      surname: surname,
-                    email: email,
-                    password: password,
-                    password_confirmation: password)
+        surname: surname,
+        email: email,
+        password: password,
+        password_confirmation: password)
     end
     #    User.all.each do |user|
     #   puts "[DEBUG] uploading images for user #{user.id} of #{User.last.id}"
