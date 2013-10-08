@@ -40,6 +40,7 @@ class FriendshipsController < ApplicationController
 
   # POST /friendships
   # POST /friendships.json
+  # never called?
   def create
     # friendship oneway
     @friendship = current_friend.friendships.new(params[:friendship])
@@ -79,10 +80,14 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1.json
   def destroy
     @friendship = Friendship.find(params[:id])
+    @friendship2 = Friendship.where("otherfriend= ? AND friend_id= ?", current_friend.id.to_s, @friendship.otherfriend).last
+    #where(something).last == take
+
     @friendship.destroy
+    @friendship2.destroy
 
     respond_to do |format|
-      format.html { redirect_to friendships_url }
+      format.html { redirect_to edit_friend_registration_url, notice: 'Friendship was successfully deleted.' }
       format.json { head :no_content }
     end
   end

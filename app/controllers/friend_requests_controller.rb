@@ -5,6 +5,7 @@ class FriendRequestsController < ApplicationController
   def index
     @friend_requests = current_friend.friend_requests.all
     @pending_requests = FriendRequest.where("otherfriend= ?", current_friend)
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,4 +83,29 @@ class FriendRequestsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # ACCEPT /friend_requests/1
+  # ACCEPT /friend_requests/1.json
+  def accept
+    @friend_request = FriendRequest.find(params[:id])
+
+    @fs1= current_friend.friendships.create(:otherfriend => params[:otherfriend])
+    @fs2= (Friend.find(params[:otherfriend])).friendships.create(:otherfriend => current_friend.id)
+    
+    @friend_request.destroy
+
+
+    respond_to do |format|
+      if (@fs1.save && @fs2.save)
+        format.html { redirect_to edit_friend_registration_url, notice: 'Friendship was successfully created.' }
+        format.json { render json: edit_friend_registration_url, status: :created, location: edit_friend_url }
+      else
+        format.html { render action: "new" }
+        format.json { render json: edit_friend_registration_url.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
 end

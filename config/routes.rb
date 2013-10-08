@@ -1,12 +1,16 @@
 Friendmap::Application.routes.draw do
 
-  resources :friend_requests
-
-
-  resources :friendships
-
 
   devise_for :friends
+  resources :friendships
+  resources :friend_requests do
+      member do
+            get 'accept/:otherfriend', to: 'friend_requests#accept', as: :accept
+      end
+  end
+
+
+
 
   get 'about'=> 'pages#about'
   root :to => 'pages#home'

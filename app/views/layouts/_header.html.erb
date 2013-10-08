@@ -8,37 +8,44 @@
             </a>
             <%= link_to 'FriendMap',  root_path, class: "brand" %>
             
-                <div class="nav-collapse">
-                    <ul class="nav">
-                        <% if friend_signed_in?  %>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <% if friend_signed_in?  %>
                         <% @name= %>
                         <li>
                           <%= link_to current_friend.name.to_s.humanize,  edit_friend_registration_path%>
-                         </li>
-                          <% end %> 
-                          <li>    
-                            <%= link_to 'About',  about_path %>
-                        </li>                            
-                    </ul>
-                    <ul class="nav pull-right">
-                      <% if !friend_signed_in? %>
-                         <div class="btn-group btn-group-xs">
+                        </li>
+                    <% end %> 
+                <li>    
+                    <%= link_to 'About',  about_path %>
+                </li>                            
+                </ul>
+                <ul class="nav pull-right">
+                    <% if !friend_signed_in? %>
+                        <div class="btn-group btn-group-xs">
                             <li><%= link_to 'Login',  new_friend_session_path, class: "btn btn-small" %></li>
-                         </div>
-                         <div class="btn-group btn-group-xs">
+                        </div>
+                        <div class="btn-group btn-group-xs">
                             <li><%= link_to "Sign Up Now!", new_friend_registration_path, class: "btn btn-primary btn-small" %></li>
-                         </div>
-                      <% else %>
-                         <div class="btn-group btn-group-xs">
-                            <li><%= link_to 'requests',  friend_requests_path, class: "btn btn-small" %></li>
-                         </div>
-                         <div class="btn-group btn-group-xs">
-                             <li><%= link_to 'Logout',  destroy_friend_session_path, class: "btn btn-small btn-quit", method: :delete %></li>
-                         </div>
-                            <% end %>
-                        
-                    </ul>
-                </div>
+                        </div>
+                    <% else %>
+                        <%if (@pending_requests.respond_to? :length) && @pending_requests.length>1  %>
+                            <% @n= @pending_requests.length.to_s %>
+                            <div class="btn-group btn-group-xs">
+                                <li><%= link_to @n<<' requests',  friend_requests_path, class: "btn btn-small" %></li>
+                            </div>
+                        <%elsif (@pending_requests.respond_to? :length) && @pending_requests.length==1  %>
+                            <% @n= @pending_requests.length.to_s %>
+                            <div class="btn-group btn-group-xs">
+                                <li><%= link_to @n<<' request',  friend_requests_path, class: "btn btn-small" %></li>
+                            </div>
+                        <% end %>
+                        <div class="btn-group btn-group-xs">
+                            <li><%= link_to 'Logout',  destroy_friend_session_path, class: "btn btn-small btn-quit", method: :delete %></li>
+                        </div>
+                    <% end %>
+                </ul>
             </div>
+        </div>
     </div>
 </div>

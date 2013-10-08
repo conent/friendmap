@@ -31,10 +31,11 @@
   </tr>
 
 <% @pending_requests.each do |pending_request| %>
+<% @asking_friend = (Friend.where("id= ?", pending_request.friend_id)).last %>
   <tr>
     <td><%= Friend.find_by_id(pending_request.friend_id).name %></td>
     <td><%= link_to 'Show', pending_request %></td>
-    <td><%= link_to 'Edit', edit_friend_request_path(pending_request) %></td>
+    <td><%= link_to 'accept', accept_friend_request_path(pending_request, @asking_friend) %></td>
     <td><%= link_to 'Destroy', pending_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
