@@ -29,17 +29,18 @@
                             <li><%= link_to "Sign Up Now!", new_friend_registration_path, class: "btn btn-primary btn-small" %></li>
                         </div>
                     <% else %>
-                        <%if (@pending_requests.respond_to? :length) && @pending_requests.length>1  %>
-                            <% @n= @pending_requests.length.to_s %>
-                            <div class="btn-group btn-group-xs">
-                                <li><%= link_to @n<<' requests',  friend_requests_path, class: "btn btn-small" %></li>
-                            </div>
-                        <%elsif (@pending_requests.respond_to? :length) && @pending_requests.length==1  %>
-                            <% @n= @pending_requests.length.to_s %>
-                            <div class="btn-group btn-group-xs">
-                                <li><%= link_to @n<<' request',  friend_requests_path, class: "btn btn-small" %></li>
-                            </div>
-                        <% end %>
+                        <!-- this ruby code shouldn't be here -->
+                            <% @requests_n= FriendRequest.where("otherfriend= ?", current_friend).length %>
+                        <!-- find a better place for this ^ -->
+                            <%if @requests_n >1  %>
+                                <div class="btn-group btn-group-xs">
+                                    <li><%= link_to @requests_n.to_s<<' requests',  friend_requests_path, class: "btn btn-small" %></li>
+                                </div>
+                            <%elsif @requests_n ==1 %>
+                                <div class="btn-group btn-group-xs">
+                                    <li><%= link_to @requests_n.to_s<<' request',  friend_requests_path, class: "btn btn-small" %></li>
+                                </div>
+                            <% end %>
                         <div class="btn-group btn-group-xs">
                             <li><%= link_to 'Logout',  destroy_friend_session_path, class: "btn btn-small btn-quit", method: :delete %></li>
                         </div>
