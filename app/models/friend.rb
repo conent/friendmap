@@ -7,6 +7,11 @@ class Friend < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, 
   					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude
+  
+  # validate
+  validates :surname, :name, presence: true
+
+
   # attr_accessible :title, :body
 
   has_many :friendships, :dependent => :destroy
