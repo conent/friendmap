@@ -1,10 +1,25 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <p>
   <b>Otherfriend:</b>
   <%= @friend_request.otherfriend %>
 </p>
+<table class="table table-striped">
+  <tr>
+    <th>Asked by</th>
+    <th>Email address</th>
+    <th>When</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= Friend.find_by_id(@friend_request.otherfriend).name %> <%= Friend.find_by_id(@friend_request.otherfriend).surname %></td>
+    <td><%= Friend.find_by_id(@friend_request.otherfriend).email %></td>
+    <td><%= @friend_request.created_at %></td>
+  </tr>
+
+</table>
 
 
-<%= link_to 'Edit', edit_friend_request_path(@friend_request) %> |
 <%= link_to 'Back', friend_requests_path %>

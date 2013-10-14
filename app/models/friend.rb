@@ -9,7 +9,7 @@ class Friend < ActiveRecord::Base
   					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude
   
   # validate
-  validates :surname, :name, presence: true
+  validates :surname, :name, :email, :password, :password_confirmation, presence: true
 
 
   # attr_accessible :title, :body

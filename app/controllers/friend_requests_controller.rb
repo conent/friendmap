@@ -1,5 +1,10 @@
 class FriendRequestsController < ApplicationController
     before_filter :authenticate_friend!
+    
+    # helper
+    helper FriendRequestsHelper
+    include FriendRequestsHelper
+
   # GET /friend_requests
   # GET /friend_requests.json
   def index
@@ -43,23 +48,39 @@ class FriendRequestsController < ApplicationController
   # POST /friend_requests
   # POST /friend_requests.json
   def create
-    @friend_request = current_friend.friend_requests.new(params[:friend_request])
 
-    respond_to do |format|
-      if @friend_request.save
-        format.html { redirect_to @friend_request, notice: 'Friend request was successfully created.' }
-        format.json { render json: @friend_request, status: :created, location: @friend_request }
-      else
-        format.html { render action: "new" }
+    @res = emailExists(params[:friend_request][:otherfriend]);
+    if @res != false
+        @friend_request = current_friend.friend_requests.new("otherfriend"=> @res)
+        respond_to do |format|
+          if @friend_request.save
+            format.html { redirect_to @friend_request, notice: 'Friend request was successfully created.' }
+            format.json { render json: @friend_request, status: :created, location: @friend_request }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @friend_request.errors, status: :unprocessable_entity }
+          end
+        end
+    else  
+      @friend_request = current_friend.friend_requests.new("otherfriend"=> "Not signed up")
+      respond_to do |format|
+        format.html { render action: "new", notice: 'Friend\'s email is missing.' }
         format.json { render json: @friend_request.errors, status: :unprocessable_entity }
       end
     end
+
+    
+
+      
+   
   end
 
   # PUT /friend_requests/1
   # PUT /friend_requests/1.json
   def update
     @friend_request = FriendRequest.find(params[:id])
+
+
 
     respond_to do |format|
       if @friend_request.update_attributes(params[:friend_request])
