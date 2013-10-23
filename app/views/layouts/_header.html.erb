@@ -11,6 +11,14 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <% if friend_signed_in?  %>
+                    <li><table>
+                        <tr>
+                            <td style="height: 40px;">
+                                <% if current_friend.picture.exists? %>
+                                    <%= image_tag current_friend.picture.url(:navbar) %></td></tr></table></li>
+                                <% else %>
+                                    <%= image_tag "/listimages/navbar/social_default.png" %></td></tr></table></li>
+                                <% end %>
                         <% @name= %>
                         <li>
                           <%= link_to current_friend.name.to_s.humanize,  edit_friend_registration_path%>

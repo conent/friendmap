@@ -11,8 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131007104748) do
+ActiveRecord::Schema.define(:version => 20131023093832) do
 
+  create_table "friend_requests", :force => true do |t|
+    t.integer  "otherfriend"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "friend_id"
+  end
+
+  add_index "friend_requests", ["friend_id"], :name => "index_friend_requests_on_friend_id"
 
   create_table "friends", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -35,6 +43,10 @@ ActiveRecord::Schema.define(:version => 20131007104748) do
     t.datetime "lastseen"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true
@@ -48,14 +60,5 @@ ActiveRecord::Schema.define(:version => 20131007104748) do
   end
 
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
-
-  create_table "friend_requests", :force => true do |t|
-    t.integer  "otherfriend"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "friend_id"
-  end
-
-  add_index "friend_requests", ["friend_id"], :name => "index_friend_requests_on_friend_id"
 
 end

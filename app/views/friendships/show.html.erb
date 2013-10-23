@@ -2,12 +2,14 @@
 
 <table class="table table-striped">
   <tr>
+    <th></th>
     <th>Friend name</th>
     <th>Is online</th>
     <th>Friend email</th>
     <th>Last time online</th>
   </tr>
   <tr>
+    <td><%= image_tag Friend.find(@friendship.otherfriend).picture.url(:small) %></td>
     <td><%= Friend.find(@friendship.otherfriend).name %></th>
     <td><%= Friend.find(@friendship.otherfriend).isonline %></th>
     <td><%= Friend.find(@friendship.otherfriend).email %></th>

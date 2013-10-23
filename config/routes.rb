@@ -10,8 +10,21 @@ Friendmap::Application.routes.draw do
   end
 
 
+  match "/addFriend" => "mobile#addFriend", :via => :post
+  match "/confirmFriend" => "mobile#confirmFriend", :via => :post
+  match "/declineFriend" => "mobile#declineFriend", :via => :post
+  match "/deleteFriend" => "mobile#deleteFriend", :via => :post
+  match "/getFriendList" => "mobile#getFriendList", :via => :post
+  match "/locationUpdate" => "mobile#locationUpdate", :via => :post
+  match "/signin" => "mobile#signin", :via => :post
+  match "/signup" => "mobile#signup", :via => :post
+  match "/updateInfo" => "mobile#updateInfo", :via => :post
+  match "/uploadImage" => "mobile#uploadImage", :via => :post
+    
+  
 
 
+  get 'testformsi' => 'pages#testformsi', :via => :post
   get 'about'=> 'pages#about'
   root :to => 'pages#home'
 
