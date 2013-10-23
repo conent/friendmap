@@ -1,6 +1,5 @@
 class Friend < ActiveRecord::Base
   attr_accessor :fid
-  attr_accessible :picture_file_name
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -40,7 +39,7 @@ private
 
   def change_file_name
     if (Friend.current_friend!=nil)
-      extension = File.extname(picture_file_name).downcase
+      extension = File.extname(self.picture_file_name).downcase
       self.fid= Friend.current_friend.id.to_s
       self.picture_file_name = fid.concat(".png")  
     end
