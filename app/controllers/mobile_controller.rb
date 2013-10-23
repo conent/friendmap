@@ -10,7 +10,7 @@ class MobileController < ApplicationController
 		# 3: already added
 
 
-		if (!((params[:userid].present?) && (params[:friendemail].present?))
+		if (!((params[:userid].present?) && (params[:friendemail].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
 				format.json { render json: json}
@@ -47,7 +47,7 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: bad request missing info
 
-		if (!((params[:userid].present?) && (params[:friendid].present?))
+		if (!((params[:userid].present?) && (params[:friendid].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
 				format.json { render json: json}
