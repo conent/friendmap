@@ -35,9 +35,7 @@
         <%= f.input :password, label: "New Password", autocomplete: "off" %>
         <%= f.input :password_confirmation, label: "New Password Confirmation", autocomplete: "off" %>
         <%= f.input :current_password %>
-        <% @original_filename="aldo.png" %>
-        <% session[:friend_id] = current_friend.id %>
-        <% Thread.current[:friend_id] = current_friend.id %>
+        
 
         <div class="form-actions">
           <%= f.submit "Update", class: "btn btn-primary"%>
