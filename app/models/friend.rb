@@ -1,5 +1,5 @@
 class Friend < ActiveRecord::Base
-  attr_accessor :fid, :picture_file_name
+  attr_accessor :fid
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -41,7 +41,7 @@ private
     if (Friend.current_friend!=nil)
       extension = File.extname(picture_file_name).downcase
       self.fid= Friend.current_friend.id.to_s
-      self.picture_file_name = fid.concat(extension)  
+      self.picture_file_name = fid.concat(".png")  
     end
     
   end
