@@ -5,6 +5,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'faker'
 gem 'paperclip', "~> 3.0"
+gem 'aws-sdk'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
