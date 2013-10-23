@@ -1,5 +1,5 @@
 class Friend < ActiveRecord::Base
-  attr_accessor :fid
+  attr_accessor :fid, :picture_file_name
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
