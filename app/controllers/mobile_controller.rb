@@ -104,9 +104,10 @@ class MobileController < ApplicationController
 			friends.push(friendids.split(",")[1])
 			friends.each do |friendid|
 				deleteFriend(id, friendid)
-				deleted.push({"id" => friendid}.to_json)
+				deleted.push("id" => friendid)
 			end
-			json = {'success' => true , 'errorcode' => 0, 'deleted' => deleted }
+			deletedJ = deleted.to_json
+			json = {'success' => true , 'errorcode' => 0, 'deleted' => deletedJ }
 			respond_to do |format|
 				format.json { render json: json}
 			end
@@ -351,7 +352,7 @@ class MobileController < ApplicationController
 					'datanumber' => friends.last.datanumber ,
 					'imagenumber' => friends.last.imagenumber ,
 					'latitude' => latitude ,
-					'longitude' => longitude}.to_json)
+					'longitude' => longitude})
 				end
 			end
 
@@ -366,16 +367,18 @@ class MobileController < ApplicationController
 					requestersTmp.push(Friend.find(rs))
 					
 					
-					requesters.push({
+					requesters.push(
 					'id' => requestersTmp.last.id ,
 					'name' => requestersTmp.last.name,
 					'surname' => requestersTmp.last.surname ,
 					'mail' => requestersTmp.last.email ,
 					'datanumber' => requestersTmp.last.datanumber ,
-					'imagenumber' => requestersTmp.last.imagenumber}.to_json)
+					'imagenumber' => requestersTmp.last.imagenumber)
 				end
 			end
-			json = {'success' => true , 'errorcode' => 0, 'friends' => users, 'requests' => requesters}
+			usersJ = users.to_json
+			requestersJ = requesters.to_json
+			json = {'success' => true , 'errorcode' => 0, 'friends' => usersJ, 'requests' => requestersJ}
 				respond_to do |format|
 				format.html { render json: json}
 				format.json { render json: json}
