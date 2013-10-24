@@ -143,7 +143,7 @@ class MobileController < ApplicationController
 			latitude = params[:latitude]
 			longitude = params[:longitude]
 			updateLocation(id, latitude, longitude)
-			puts(retrieveFL(params[:id]))
+			retrieveFL(params[:id])
 		end
 	end
 
