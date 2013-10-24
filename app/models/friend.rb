@@ -22,7 +22,6 @@ class Friend < ActiveRecord::Base
   has_many :friend_requests, :dependent => :destroy
 
 
-
   Paperclip.interpolates :normalized_picture_file_name do |attachment, style|
     attachment.instance.normalized_picture_file_name
   end
@@ -30,4 +29,15 @@ class Friend < ActiveRecord::Base
   def normalized_picture_file_name
     "#{self.id}"
   end
+
+    after_post_process :after_post_process
+
+   def after_post_process
+      if (Friend.find("#{self.id}").imagenumber == nil)
+        Friend.find("#{self.id}").update_attributes(:imagenumber => 1)
+      else
+        add= Friend.find("#{self.id}").imagenumber + 1
+        Friend.find("#{self.id}").update_attributes(:imagenumber => add)
+      end
+    end
 end
