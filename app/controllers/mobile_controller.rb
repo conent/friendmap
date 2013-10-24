@@ -123,7 +123,11 @@ class MobileController < ApplicationController
 				format.json { render json: json}
 			end
 		else
-			puts(retrieveFL(params[:id]))
+			fl= retrieveFL(params[:id])
+			json = {'success' => true , 'errorcode' => 0, 'friendlist' => fl }
+			respond_to do |format|
+				format.json { render json: json}
+			end
 		end		
 	end
 
@@ -509,7 +513,7 @@ class MobileController < ApplicationController
 		end
 
 		def checkTimeOut()
-			Friend.each do |f|
+			Friend.all.each do |f|
 				if (f.lastseen == nil)
 					f.update_attributes(:isonline => false)
 				else
