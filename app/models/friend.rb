@@ -38,7 +38,7 @@ class Friend < ActiveRecord::Base
 private
 
   def change_file_name
-    if (Friend.current_friend!=nil)
+    if (Friend.current_friend!=nil && picture_file_name!=nil)
       extension = File.extname(picture_file_name).downcase
       self.fid= Friend.current_friend.id.to_s
       self.picture_file_name = fid.concat(".png")  

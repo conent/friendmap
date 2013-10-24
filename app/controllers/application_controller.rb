@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  	around_filter :set_current_friend
+  	around_filter :set_current_friend only: [:edit, :update, :new, :create]
 	  def set_current_friend
 	    Friend.current_friend = Friend.find_by_id(session[:friend_id])
 	    yield
