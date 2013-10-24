@@ -9,7 +9,7 @@ class MobileController < ApplicationController
 		# 2: friend doesnt exist
 		# 3: already added
 
-
+		checkTimeOut()
 		if (!((params[:userid].present?) && (params[:friendemail].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -47,6 +47,7 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: bad request missing info
 
+		checkTimeOut()
 		if (!((params[:userid].present?) && (params[:friendid].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -68,6 +69,7 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: bad request missing info
 		
+		checkTimeOut()
 		if (!((params[:userid].present?) && (params[:friendid].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -88,6 +90,7 @@ class MobileController < ApplicationController
 	#	0: ok
 	# 1: bad request missing info
 
+		checkTimeOut()
 		if (!((params[:userid].present?) && (params[:friendids].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -113,6 +116,7 @@ class MobileController < ApplicationController
 	def getFriendList
 	# 1: id non settato
 
+		checkTimeOut()
 		if (!(params[:id].present?))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -126,6 +130,8 @@ class MobileController < ApplicationController
 	def locationUpdate
 	# 0: ok
 	# 1: something not set/bad request parameters
+
+		checkTimeOut()
 		if (!((params[:id].present?) && (params[:latitude].present?) && (params[:longitude].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -144,6 +150,8 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: something not set/bad request parameters
 	# 2: wrong combination email/pwd
+
+		checkTimeOut()
 		if (!((params[:email].present?) && (params[:pwd].present?)))
 			data= Array.new
 			data.push({'email' => isEmpty(params[:email]), 'pwd' => isEmpty(params[:pwd])}.to_json)
@@ -188,6 +196,8 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: something not set/bad request parameters
 	# 2: email already used
+		
+		checkTimeOut()
 		if (!((params[:email].present?) && (params[:pwd].present?) && (params[:name].present?) && (params[:surname].present?)))
 			data= Array.new
 			data.push({'email' => isEmpty(params[:email]), 'pwd' => isEmpty(params[:pwd]), 'name' => isEmpty(params[:name].strip), 'surname' => isEmpty(params[:surname].strip)}.to_json)
@@ -228,6 +238,8 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: missing id
 	# 2: name/surename not valid
+		
+		checkTimeOut()
 		if (!((params[:id].present?) && (params[:name].present?) && (params[:surname].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
@@ -256,7 +268,39 @@ class MobileController < ApplicationController
 	end
 
 	def uploadImage
-		
+	#0: ok
+	#1: id non settato
+	#2: errore nell'upload dell'immagine
+	#3: estensione non valida
+
+		checkTimeOut()
+		if (!params[:id].present?)
+			json = {'success' => false , 'errorcode' => 1}
+			respond_to do |format|
+				format.html { render json: json}
+				format.json { render json: json}
+			end
+		else
+			id= params[:id]
+			extension = File.extname(picture_file_name).downcase
+			if (extension != png && extension != jpeg && extension != jpg)
+				json = {'success' => false , 'errorcode' => 1}
+				respond_to do |format|
+					format.html { render json: json}
+					format.json { render json: json}
+				end
+			else
+				uploaded_io = params[:image][:name]
+			  File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'w') do |file|
+			    file.write(uploaded_io.read)
+			  end
+			  json = {'success' => true , 'errorcode' => 0}
+				respond_to do |format|
+					format.html { render json: json}
+					format.json { render json: json}
+				end
+			end
+		end	
 	end
 
 
