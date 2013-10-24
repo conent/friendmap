@@ -121,14 +121,10 @@ class MobileController < ApplicationController
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
 				format.json { render json: json}
-				format.html { flist }
+				format.html { render json: json }
 			end
 		else
-			flist= retrieveFL(params[:id])
-			respond_to do |format|
-				format.html { flist }
-				format.json { flist }
-			end
+			retrieveFL(params[:id])
 		end		
 	end
 
