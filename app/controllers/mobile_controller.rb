@@ -545,16 +545,12 @@ class MobileController < ApplicationController
 
 		def updateLocation(id, latitude, longitude)
 			friend=Friend.find(id)
-			if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-		    params[:user].delete(:password)
-		    params[:user].delete(:password_confirmation)
-			end
 			submission_hash={
 												"latitude" => latitude,
 												"longitude" => longitude,
 												"lastseen" => Time.now,
 												"isonline" => "1"}
-			f.update_attributes(submission_hash) # HOPE
+			friend.update_attributes(submission_hash) # HOPE
 		end
 
 				
