@@ -13,7 +13,7 @@
     <% if Friend.find(friendship.otherfriend).picture.exists? %>
       <td style="vertical-align: middle;"><%= image_tag Friend.find(friendship.otherfriend).picture.url(:small) %></td>
     <% else %>
-      <td style="vertical-align: middle;"><%= image_tag "/listimages/navbar/social_default.png" %></td>
+      <td style="vertical-align: middle;"><%= image_tag ("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/social_default.png") %></td>
     <% end %>
     <td style="vertical-align: middle;"><%= Friend.find_by_id(friendship.otherfriend).name %></td>
     <td style="vertical-align: middle;"><%= link_to 'Show', friendship %></td>

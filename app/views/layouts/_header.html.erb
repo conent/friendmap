@@ -17,7 +17,7 @@
                                 <% if current_friend.picture.exists? %>
                                     <%= image_tag current_friend.picture.url(:navbar) %></td></tr></table></li>
                                 <% else %>
-                                    <%= image_tag "/listimages/navbar/social_default.png" %></td></tr></table></li>
+                                    <%= image_tag ("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/navbar/social_default.png") %></td></tr></table></li>
                                 <% end %>
                         <% @name= %>
                         <li>
