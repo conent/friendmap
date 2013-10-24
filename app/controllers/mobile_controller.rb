@@ -340,8 +340,18 @@ class MobileController < ApplicationController
 						if(friends.last.latitude!=nil && friends.last.longitude!=nil)
 							latitude= "".concat(friends.last.latitude.to_s)
 							longitude= "".concat(friends.last.longitude.to_s)
+						else
+							latitude = "0"
+							longitude = "0"
+						end
+					else
+						online = false
+						if(friends.last.latitude!=nil && friends.last.longitude!=nil)
+							latitude = "0"
+							longitude = "0"
 						end
 					end
+
 					users.push({
 					'id' => friends.last.id ,
 					'name' => friends.last.name,
