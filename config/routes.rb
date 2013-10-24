@@ -10,21 +10,21 @@ Friendmap::Application.routes.draw do
   end
 
 
-  match "/addFriend" => "mobile#addFriend", :via => :post
-  match "/confirmFriend" => "mobile#confirmFriend", :via => :post
-  match "/declineFriend" => "mobile#declineFriend", :via => :post
-  match "/deleteFriend" => "mobile#deleteFriend", :via => :post
-  match "/getFriendList" => "mobile#getFriendList", :via => :post
-  match "/locationUpdate" => "mobile#locationUpdate", :via => :post
-  match "/signin" => "mobile#signin", :via => :post
-  match "/signup" => "mobile#signup", :via => :post
-  match "/updateInfo" => "mobile#updateInfo", :via => :post
-  match "/uploadImage" => "mobile#uploadImage", :via => :post
+  match "/addFriend" => "mobile#addFriend", :via => [:get, :post]
+  match "/confirmFriend" => "mobile#confirmFriend", :via => [:get, :post]
+  match "/declineFriend" => "mobile#declineFriend", :via => [:get, :post]
+  match "/deleteFriend" => "mobile#deleteFriend", :via => [:get, :post]
+  match "/getFriendList" => "mobile#getFriendList", :via => [:get, :post]
+  match "/locationUpdate" => "mobile#locationUpdate", :via => [:get, :post]
+  match "/signin" => "mobile#signin", :via => [:get, :post]
+  match "/signup" => "mobile#signup", :via => [:get, :post]
+  match "/updateInfo" => "mobile#updateInfo", :via => [:get, :post]
+  match "/uploadImage" => "mobile#uploadImage", :via => [:get, :post]
     
   
 
 
-  get 'testformsi' => 'pages#testformsi', :via => :post
+  get 'testformsi' => 'pages#testformsi', :via => [:get, :post]
   get 'about'=> 'pages#about'
   root :to => 'pages#home'
 
