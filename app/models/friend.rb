@@ -10,12 +10,11 @@ class Friend < ActiveRecord::Base
   					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude, :picture
   
   # validate
-  validates :surname, :name, :email, :password, :password_confirmation, presence: true
-
+  validates :surname, :name, :email, :password, :password_confirmation, presence: true, :on => :create
 
   # attr_accessible :title, :body
 
-  has_attached_file :picture, styles: { medium: "320x240>", small: "256x256>", navbar: "35x35>"},
+  has_attached_file :picture, styles: { medium: "256x256>", small: "128x128>", navbar: "35x35>"},
                               url:"/listimages/:style/:basename.:extension",
                               path:":rails_root/public/listimages/:style/:basename.:extension"
   validates_attachment :picture, content_type: { content_type: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'] },

@@ -239,6 +239,7 @@ class MobileController < ApplicationController
 	# 0: ok
 	# 1: missing id
 	# 2: name/surename not valid
+	# 3: rollback
 		
 		checkTimeOut()
 		if (!((params[:id].present?) && (params[:name].present?) && (params[:surname].present?)))
@@ -252,11 +253,18 @@ class MobileController < ApplicationController
 			name = params[:name].strip
 			surname = params[:surname].strip
 			if (name!="" && surname!="")
-				updateUserInfo(id, name, surname)
-				json = {'success' => true, 'errorcode' => 0, 'name' => name, 'surname' => surname}
-				respond_to do |format|
-					format.html { render json: json}
-					format.json { render json: json}
+				if (updateUserInfo(id, name, surname))
+					json = {'success' => true, 'errorcode' => 0, 'name' => name, 'surname' => surname}
+					respond_to do |format|
+						format.html { render json: json}
+						format.json { render json: json}
+					end
+				else
+					json = {'success' => false, 'errorcode' => 3, 'name' => name, 'surname' => surname}
+					respond_to do |format|
+						format.html { render json: json}
+						format.json { render json: json}
+					end
 				end
 			else
 				json = {'success' => false, 'errorcode' => 2}
@@ -285,7 +293,7 @@ class MobileController < ApplicationController
 			id= params[:id]
 			extension = File.extname(picture_file_name).downcase
 			if (extension != png && extension != jpeg && extension != jpg)
-				json = {'success' => false , 'errorcode' => 1}
+				json = {'success' => false , 'errorcode' => 3}
 				respond_to do |format|
 					format.html { render json: json}
 					format.json { render json: json}
@@ -295,10 +303,18 @@ class MobileController < ApplicationController
 			  File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
 			  end
-			  json = {'success' => true , 'errorcode' => 0}
-				respond_to do |format|
-					format.html { render json: json}
-					format.json { render json: json}
+			  if(incrementImageNumber(id))
+				  json = {'success' => true , 'errorcode' => 0}
+					respond_to do |format|
+						format.html { render json: json}
+						format.json { render json: json}
+					end
+				else
+					json = {'success' => true , 'errorcode' =>4}
+					respond_to do |format|
+						format.html { render json: json}
+						format.json { render json: json}
+					end
 				end
 			end
 		end	
@@ -418,13 +434,12 @@ class MobileController < ApplicationController
     	else
     		count=friend.imagenumber+1
     	end
-
-	    respond_to do |format|
-	      if friend.update_attributes(:imagenumber => count)
-	        format.json { render json: friend, notice: 'Friendship was successfully updated.' }
-	      else
-	        format.json { render json: friend.errors, status: :unprocessable_entity }
-	      end
+      if friend.update_attributes(:imagenumber => count)
+        success = true
+	      return success
+	    else
+	    	success = false
+	      return success
 	    end
 		end
 
@@ -438,17 +453,12 @@ class MobileController < ApplicationController
     		count=friend.datanumber+1
     	end
 
-    	if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-		    params[:user].delete(:password)
-		    params[:user].delete(:password_confirmation)
-			end
-
-    	respond_to do |format|
-	      if friend.update_attributes(:name => name, :surname => surname, :datanumber => count) # HOPE
-	        format.json { render json: friend, notice: 'Friendship was successfully updated.' }
-	      else
-	        format.json { render json: friend.errors, status: :unprocessable_entity }
-	      end
+	    if friend.update_attributes(:name => name, :surname => surname, :datanumber => count) # HOPE
+	    	success = true
+	      return success
+	    else
+	    	success = false
+	      return success
 	    end
 		end
 
