@@ -10,7 +10,7 @@ class MobileController < ApplicationController
 		# 3: already added
 
 		checkTimeOut()
-		if (!((params[:userid].present?) && (params[:friendemail].present?)))
+		if (!(params[:userid].present? && params[:friendemail].present?))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
 				format.json { render json: json}
@@ -24,18 +24,21 @@ class MobileController < ApplicationController
 				if (success)
 					json = {'success' => true , 'errorcode' => 0}
 					respond_to do |format|
+						format.html { render json: json }
 						format.json { render json: json}
 					end
 				else 
 					json= {'success' => false , 'errorcode' => 3}
 					respond_to do |format|
+						format.html { render json: json }
 						format.json { render json: json}
 					end
 				end
 			else 
 				json = {'success' => false , 'errorcode' => 2}
 				respond_to do |format|
-						format.json { render json: json}
+					format.html { render json: json }
+					format.json { render json: json}
 				end
 		 	end
 		end
