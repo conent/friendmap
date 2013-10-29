@@ -42,11 +42,11 @@
                         <!-- find a better place for this ^ -->
                             <%if @requests_n >1  %>
                                 <div class="btn-group btn-group-xs">
-                                    <li><%= link_to @requests_n.to_s<<' requests',  friend_requests_path, class: "btn btn-small" %></li>
+                                    <li><%= link_to @requests_n.to_s<<' requests',  friend_requests_path, class: "btn btn-small" , {:style => "border-width:1px; border-style:solid; border-color:#ff0000"} %></li>
                                 </div>
                             <%elsif @requests_n ==1 %>
                                 <div class="btn-group btn-group-xs">
-                                    <li><%= link_to @requests_n.to_s<<' request',  friend_requests_path, class: "btn btn-small" %></li>
+                                    <li><%= link_to @requests_n.to_s<<' request',  friend_requests_path, class: "btn btn-small", {:style => "border-width:1px; border-style:solid; border-color:#ff0000"} %></li>
                                 </div>
                             <% end %>
                         <div class="btn-group btn-group-xs">
