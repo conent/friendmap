@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(:version => 20131023093832) do
     t.string   "name"
     t.string   "surname"
     t.string   "isonline"
-    t.integer  "datanumber",             :default => 0
-    t.integer  "imagenumber",            :default => 0
+    t.integer  "datanumber",             :default => 0,  :null => false
+    t.integer  "imagenumber",            :default => 0,  :null => false
     t.datetime "lastseen"
-    t.float    "latitude",               :default => 0
-    t.float    "longitude",              :default => 0
+    t.float    "latitude",               :default => 0,  :null => false
+    t.float    "longitude",              :default => 0,  :null => false
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
