@@ -532,12 +532,12 @@ class MobileController < ApplicationController
 		def checkTimeOut()
 			Friend.all.each do |f|
 				if (f.lastseen == nil)
-					f.update_attributes(:isonline => false)
+					f.update_attributes(:isonline => "0")
 				else
 					if ((Time.now - f.lastseen)/1.minute > 8)
-						f.update_attributes(:isonline => false)
+						f.update_attributes(:isonline => "0")
 					else
-						f.update_attributes(:isonline => false)
+						f.update_attributes(:isonline => "0")
 					end
 				end
 			end
