@@ -17,7 +17,7 @@ class MobileController < ApplicationController
 			end
 		 else 
 			id = params[:userid]
-			email = trim(params[:friendemail])
+			email = params[:friendemail].strip
 			friendid = getIdFromMail(email)
 			if (friendid!=false)
 				success = addFriendRequest(id, friendid)
