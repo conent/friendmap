@@ -1,9 +1,7 @@
-<%= form_tag("/addfriend", method: "post") do %>
-  <%= label_tag(:userid, "id") %>
-  <%= text_field_tag(:userid) %>
-
-  <%= label_tag(:friendemail, "friendemail") %>
-  <%= text_field_tag(:friendemail) %>
-
+<%= form_tag("/signin", method: "post") do %>
+  <%= label_tag(:email, "email") %>
+  <%= text_field_tag(:email) %>
+  <%= label_tag(:pwd, "password") %>
+  <%= text_field_tag(:password) %>
   <%= submit_tag("gogogogo") %>
 <% end %>
