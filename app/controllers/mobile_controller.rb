@@ -54,6 +54,7 @@ class MobileController < ApplicationController
 		if (!((params[:userid].present?) && (params[:friendid].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		else 
@@ -62,6 +63,7 @@ class MobileController < ApplicationController
 			acceptFriendRequest(id, friendid)
 			json = {'success' => true , 'errorcode' => 0 , 'id' => friendid }
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		end	
@@ -76,6 +78,7 @@ class MobileController < ApplicationController
 		if (!((params[:userid].present?) && (params[:friendid].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		else 
@@ -84,6 +87,7 @@ class MobileController < ApplicationController
 			declineFriendRequest(id, friendid)
 			json = {'success' => true , 'errorcode' => 0 }
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		end	
@@ -97,6 +101,7 @@ class MobileController < ApplicationController
 		if (!((params[:userid].present?) && (params[:friendids].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		else 
@@ -111,6 +116,7 @@ class MobileController < ApplicationController
 			end
 			json = {'success' => true , 'errorcode' => 0, 'deleted' => deleted }
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		end
@@ -139,6 +145,7 @@ class MobileController < ApplicationController
 		if (!((params[:id].present?) && (params[:latitude].present?) && (params[:longitude].present?)))
 			json = {'success' => false , 'errorcode' => 1}
 			respond_to do |format|
+				format.html { render json: json }
 				format.json { render json: json}
 			end
 		else
