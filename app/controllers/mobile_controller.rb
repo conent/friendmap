@@ -357,7 +357,7 @@ class MobileController < ApplicationController
 					if (friends.last.isonline=='1')
 						online=true
 						if(friends.last.latitude!=nil && friends.last.longitude!=nil)
-							latitude= "".concat(friends.last.latitude.to_s)
+							latitude= 5
 							longitude= "".concat(friends.last.longitude.to_s)
 						else
 							latitude = "0"
