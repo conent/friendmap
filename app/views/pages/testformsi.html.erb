@@ -1,6 +1,9 @@
-<%= form_tag("/getfriendlist", method: "post") do %>
-  <%= label_tag(:id, "id") %>
-  <%= text_field_tag(:id) %>
+<%= form_tag("/addfriend", method: "post") do %>
+  <%= label_tag(:userid, "id") %>
+  <%= text_field_tag(:userid) %>
+
+  <%= label_tag(:friendemail, "friendemail") %>
+  <%= text_field_tag(:friendemail) %>
 
   <%= submit_tag("gogogogo") %>
 <% end %>
