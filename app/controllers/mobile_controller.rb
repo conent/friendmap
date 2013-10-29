@@ -511,8 +511,8 @@ class MobileController < ApplicationController
     	fs1.otherfriend = otherfriend
 
     	fs2 = Friendship.new
-    	fs2.friend_id = friend_id
-    	fs2.otherfriend = otherfriend
+    	fs2.friend_id = otherfriend
+    	fs2.otherfriend = friend_id
 
     	fs1.save
     	fs2.save
