@@ -356,8 +356,8 @@ class MobileController < ApplicationController
 					friends.push(Friend.find(fs))			
 					if (friends.last.isonline=='1')
 						online=true
-						if(friends.last.latitude!=nil && friends.last.longitude!=nil)
-							latitude= 5
+						if(!(friends.last.latitude == nil && friends.last.longitude == nil))
+							latitude= "".concat(friends.last.latitude.to_s)
 							longitude= "".concat(friends.last.longitude.to_s)
 						else
 							latitude = "0"
@@ -365,7 +365,7 @@ class MobileController < ApplicationController
 						end
 					else
 						online = false
-						if(friends.last.latitude!=nil && friends.last.longitude!=nil)
+						if(!(friends.last.latitude == nil && friends.last.longitude == nil))
 							latitude = "0"
 							longitude = "0"
 						end
