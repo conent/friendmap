@@ -463,7 +463,7 @@ class MobileController < ApplicationController
 		end
 
 		def getIdFromMail(email)
-			friend=Friend.where(:email => "email-1@example.com").last
+			friend=Friend.where(:email => email).last
 			if (friend != nil)
 				return friend.id
 			else
