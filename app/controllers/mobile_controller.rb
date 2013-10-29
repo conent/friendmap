@@ -344,10 +344,10 @@ class MobileController < ApplicationController
 
 		def retrieveFL (id)
 			friendships= Friendship.where(:friend_id => id).pluck(:otherfriend)
-						
+			friends = Array.new
+			users = Array.new			
+
 			if (friendships.size >0)
-				friends = Array.new
-				users = Array.new
 
 				friendships.each do |fs|
 					friends.push(Friend.find(fs))			
