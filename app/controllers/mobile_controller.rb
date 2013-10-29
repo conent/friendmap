@@ -401,7 +401,7 @@ class MobileController < ApplicationController
 					'surname' => requestersTmp.last.surname ,
 					'mail' => requestersTmp.last.email ,
 					'datanumber' => requestersTmp.last.datanumber ,
-					'imagenumber' => requestersTmp.last.imagenumber}.to_json)
+					'imagenumber' => requestersTmp.last.imagenumber})
 				end
 			end
 			json = {'success' => true , 'errorcode' => 0, 'friends' => users, 'requests' => requesters}
