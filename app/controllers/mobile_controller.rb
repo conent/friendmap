@@ -534,7 +534,7 @@ class MobileController < ApplicationController
 				if (f.lastseen == nil)
 					f.update_attributes(:isonline => false)
 				else
-					if ((Time.now - lastseen)/1.MINUTE>8)
+					if ((Time.now - f.lastseen)/1.MINUTE>8)
 						f.update_attributes(:isonline => false)
 					else
 						f.update_attributes(:isonline => false)
