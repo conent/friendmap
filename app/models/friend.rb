@@ -27,7 +27,7 @@ class Friend < ActiveRecord::Base
   end
 
   def normalized_picture_file_name
-    "#{self.id}"
+    "user_#{self.id}"
   end
 
     after_post_process :after_post_process
