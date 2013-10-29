@@ -495,7 +495,7 @@ class MobileController < ApplicationController
 			end
 		end
 
-		def acceptFriendRequest(friend_id, otherfriend)
+		def acceptFriendRequest(otherfriend, friend_id)
 			frequest = FriendRequest.where("friend_id = ? AND otherfriend = ?", friend_id, otherfriend).last
     	frequest.destroy
 
@@ -511,12 +511,12 @@ class MobileController < ApplicationController
     	fs2.save
 		end
 
-		def declineFriendRequest(friend_id, otherfriend)
+		def declineFriendRequest(otherfriend, friend_id)
 			frequest = FriendRequest.where("friend_id = ? AND otherfriend = ?", friend_id, otherfriend).last
     	frequest.destroy
 		end
 
-		def deleteFriend(friend_id, otherfriend)
+		def deleteFriend(otherfriend, friend_id)
 			fship = Friendship.where("friend_id = ? AND otherfriend = ?", friend_id, otherfriend).last
     	fship.destroy
 		end
