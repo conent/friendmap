@@ -309,7 +309,7 @@ class MobileController < ApplicationController
 					format.json { render json: json}
 				end
 			else
-				uploaded_io = @tmpfile
+				uploaded_io = params[:image].tmpfile
 			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
 			  end
