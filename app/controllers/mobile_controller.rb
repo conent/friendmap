@@ -301,7 +301,7 @@ class MobileController < ApplicationController
 			end
 		else
 			id= params[:id]
-			extension = File.extname(@original_filename).downcase
+			extension = File.extname(params[:@original_filename]).downcase
 			if (extension != png && extension != jpeg && extension != jpg)
 				json = {'success' => false , 'errorcode' => 3}
 				respond_to do |format|
