@@ -432,7 +432,7 @@ class MobileController < ApplicationController
 			newUser.name = name
 			newUser.surname = surname
 			newUser.email = email
-			encrypted_password = Friend.new(:password => password).encrypted_password
+			encrypted_password = Friend.new(:password => pwd).encrypted_password
 			newUser.encrypted_password = encrypted_password
 
 			respond_to do |format|
