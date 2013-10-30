@@ -312,6 +312,7 @@ class MobileController < ApplicationController
 				uploaded_io = params[:image].tmpfile
 			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
+			    file.close
 			  end
 			  if(incrementImageNumber(id))
 				  json = {'success' => true , 'errorcode' => 0}
