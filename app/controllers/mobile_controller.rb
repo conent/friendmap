@@ -309,7 +309,9 @@ class MobileController < ApplicationController
 					format.json { render json: json}
 				end
 			else
-				puts("sono qui")
+				puts "sono qui"
+				logger.info "blah"
+				p "asd"
 				Rails.logger.debug("debug::" + params[:image].original_filename)
 				uploaded_io = params[:image].tmpfile
 				puts("sono qui 2")
