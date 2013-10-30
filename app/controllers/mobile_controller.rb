@@ -301,7 +301,7 @@ class MobileController < ApplicationController
 			end
 		else
 			id= params[:id]
-			extension = File.extname(params[:@original_filename]).downcase
+			extension = File.extname(params[:image].original_filename).downcase
 			if (extension != png && extension != jpeg && extension != jpg)
 				json = {'success' => false , 'errorcode' => 3}
 				respond_to do |format|
@@ -310,7 +310,7 @@ class MobileController < ApplicationController
 				end
 			else
 				uploaded_io = @tmpfile
-			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(@original_filename), 'w') do |file|
+			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
 			  end
 			  if(incrementImageNumber(id))
