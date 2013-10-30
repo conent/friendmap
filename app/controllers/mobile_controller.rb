@@ -435,13 +435,13 @@ class MobileController < ApplicationController
 			encrypted_password = Friend.new(:password => pwd).encrypted_password
 			newUser.encrypted_password = encrypted_password
 
-			respond_to do |format|
+			
 	      if (newUser.save)
-	        format.json { render json: newUser, status: :created, location: newUser }
+	        return newUser.id
 	      else
-	        format.json { render json: newUser.errors, status: :unprocessable_entity }
+	        return false
 	      end
-    	end	
+    	
 		end
 
 		def incrementImageNumber(id)
