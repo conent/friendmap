@@ -310,14 +310,17 @@ class MobileController < ApplicationController
 				end
 			else
 				puts("sono qui")
+				Rails.logger.debug("debug::" + params[:image].original_filename)
 				uploaded_io = params[:image].tmpfile
 				puts("sono qui 2")
+				Rails.logger.debug("debug::" + params[:image].original_filename)
 			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
 			    file.close
 			  end
 			  if(incrementImageNumber(id))
 			  	puts("sono qui 3")
+			  	Rails.logger.debug("debug::" + params[:image].original_filename)
 				  json = {'success' => true , 'errorcode' => 0}
 					respond_to do |format|
 						format.html { render json: json}
