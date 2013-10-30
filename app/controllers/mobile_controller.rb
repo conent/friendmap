@@ -309,12 +309,15 @@ class MobileController < ApplicationController
 					format.json { render json: json}
 				end
 			else
+				puts("sono qui")
 				uploaded_io = params[:image].tmpfile
+				puts("sono qui 2")
 			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
 			    file.close
 			  end
 			  if(incrementImageNumber(id))
+			  	puts("sono qui 3")
 				  json = {'success' => true , 'errorcode' => 0}
 					respond_to do |format|
 						format.html { render json: json}
