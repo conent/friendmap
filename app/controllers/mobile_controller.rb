@@ -361,8 +361,8 @@ class MobileController < ApplicationController
 
 				friendships.each do |fs|
 					friends.push(Friend.find(fs))			
-					if (friends.last.isonline=='1')
-						online=true
+					if (friends.last.isonline=="true")
+						online="true"
 						if(!(friends.last.latitude == nil && friends.last.longitude == nil))
 							latitude= "".concat(friends.last.latitude.to_s)
 							longitude= "".concat(friends.last.longitude.to_s)
@@ -371,7 +371,7 @@ class MobileController < ApplicationController
 							longitude = "0"
 						end
 					else
-						online = false
+						online = "flase"
 						if(!(friends.last.latitude == nil && friends.last.longitude == nil))
 							latitude = "0"
 							longitude = "0"
@@ -542,12 +542,12 @@ class MobileController < ApplicationController
 		def checkTimeOut()
 			Friend.all.each do |f|
 				if (f.lastseen == nil)
-					f.update_attributes(:isonline => "0")
+					f.update_attributes(:isonline => "false")
 				else
 					if ((Time.now - f.lastseen)/1.minute > 8)
-						f.update_attributes(:isonline => "0")
+						f.update_attributes(:isonline => "false")
 					else
-						f.update_attributes(:isonline => "0")
+						f.update_attributes(:isonline => "true")
 					end
 				end
 			end
@@ -559,7 +559,7 @@ class MobileController < ApplicationController
 												"latitude" => latitude,
 												"longitude" => longitude,
 												"lastseen" => Time.now,
-												"isonline" => "1"}
+												"isonline" => "true"}
 			friend.update_attributes(submission_hash) # HOPE
 		end
 
