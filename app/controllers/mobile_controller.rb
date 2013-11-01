@@ -434,9 +434,13 @@ class MobileController < ApplicationController
 			newUser.email = email
 			newUser.password = pwd
 			newUser.password_confirmation=pwd
+			
 
 			
 	      if (newUser.save!)
+	      	encrypted_password = Friend.new(:password => pwd).encrypted_password
+					newUser.encrypted_password = encrypted_password
+	        newUser.update_attributes(:encrypted_password => encrypted_password)
 	        return newUser.id
 	      else
 	        return false
