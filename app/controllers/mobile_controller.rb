@@ -224,7 +224,7 @@ class MobileController < ApplicationController
 			pwd = params[:pwd].strip
 			if (isAvailableEmail(email))
 				encrypted_password = Friend.new(:password => pwd).encrypted_password
-				id = insertNewUser(name, surname, email, encrypted_password)
+				id = insertNewUser(name, surname, email, pwd)
 				json = {'success' => true ,'errorcode' => 0 ,'id' => id,'name' => name,'surname' => surname,'mail' => email}
 				respond_to do |format|
 					format.html { render json: json}
@@ -437,15 +437,11 @@ class MobileController < ApplicationController
 			
 
 			
-	      if (newUser.save!)
-	      	encrypted_password = Friend.new(:password => pwd).encrypted_password
-					newUser.encrypted_password = encrypted_password
-	        newUser.update_attributes(:encrypted_password => encrypted_password)
-	        return newUser.id
-	      else
-	        return false
-	      end
-    	
+	    if (newUser.save!)
+	      return newUser.id
+	    else
+	      return false
+	    end
 		end
 
 		def incrementImageNumber(id)
