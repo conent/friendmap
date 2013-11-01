@@ -436,7 +436,7 @@ class MobileController < ApplicationController
 			newUser.encrypted_password = encrypted_password
 
 			
-	      if (newUser.save)
+	      if (newUser.save!)
 	        return newUser.id
 	      else
 	        return false
