@@ -539,12 +539,16 @@ class MobileController < ApplicationController
 
 		def checkSignIn(email, pwd)
 			friend= Friend.where("email = ?", email).last
-			if (!friend.valid_password?(pwd))
+			if (friend == nil)
 				return false
 			else
-				array= Array.new
-				array.push(friend.id, friend.name, friend.surname, (friend.imagenumber.to_i > 1))
-				return array
+				if (!friend.valid_password?(pwd))
+					return false
+				else
+					array= Array.new
+					array.push(friend.id, friend.name, friend.surname, (friend.imagenumber.to_i > 1))
+					return array
+				end
 			end
 		end
 
