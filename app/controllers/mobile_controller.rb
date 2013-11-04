@@ -311,13 +311,15 @@ class MobileController < ApplicationController
 			else
 				s3 = AWS::S3.new(
 										    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-										    :secret_access_key => :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+										    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
 										    :s3_endpoint => 's3-us-west-2.amazonaws.com'
 												)
 
 				bucket = s3.buckets['friendmap']
 				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:picture])
 
+				#S3Object.store('me.jpg', open(params[:picture]), 'friendmap')
+				
 				# uploaded_io = params[:picture].tmpfile
 				# File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:picture].original_filename), 'w') do |file|
 			    # file.write(uploaded_io.read)
