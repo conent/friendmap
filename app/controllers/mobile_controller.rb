@@ -310,7 +310,6 @@ class MobileController < ApplicationController
 				end
 			else
 				f1=Friend.find(id)
-				f1.picture = params[:picture]
 				f1.update_attributes(:picture => params[:picture])
 				
 				# uploaded_io = params[:picture].tmpfile
