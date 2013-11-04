@@ -1,24 +1,11 @@
-<%= form_tag("/uploadimage", method: "POST", :multipar => true) do %>
+<%= form_tag("/uploadimage", method: "POST", multipart: true) do %>
   <%= label_tag(:id, "id") %>
   <%= text_field_tag(:id) %>
 
-    <%= label_tag(:name, "name") %>
+  <%= label_tag(:name, "name") %>
   <%= text_field_tag(:name) %>
-
-  <p><label for="upload_file">Select File</label> : 
-	<%= file_field_tag 'picture' %></p>
-
+  <br>
+	<%= file_field_tag 'picture' %>
+<br>
   <%= submit_tag("gogogogo") %>
-<% end %>
-
-<%= form_for("/uploadimage", method: "POST", :multipart => true ) do |f| %>
-<div class="field">
-	<%= f.label(:id, "id") %>
-  <%= f.text_field(:id) %>
-  <%= f.label :photo %><br />
-  <%= f.file_field :picture %>
-</div>
-<div class="actions">
-  <%= f.submit %>
-</div>
 <% end %>
