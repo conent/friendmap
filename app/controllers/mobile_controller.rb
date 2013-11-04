@@ -317,7 +317,7 @@ class MobileController < ApplicationController
 				# File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:picture].original_filename), 'w') do |file|
 			    # file.write(uploaded_io.read)
 			    # file.close
-			  end
+			  #end
 			  if(incrementImageNumber(id))
 			  	
 				  json = {'success' => true , 'errorcode' => 0}
