@@ -10,3 +10,15 @@
 
   <%= submit_tag("gogogogo") %>
 <% end %>
+
+<%= form_for("/uploadimage", method: "POST", :multipart => true ) do |f| %>
+<div class="field">
+	<%= f.label(:id, "id") %>
+  <%= f.text_field(:id) %>
+  <%= f.label :photo %><br />
+  <%= f.file_field :picture %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
