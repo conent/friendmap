@@ -309,7 +309,6 @@ class MobileController < ApplicationController
 					format.json { render json: json}
 				end
 			else
-				bucket = s3.buckets['friendmap']
 				S3Object.store('me.jpg', open(params[:picture]), 'friendmap')
 				
 				# uploaded_io = params[:picture].tmpfile
