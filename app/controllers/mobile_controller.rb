@@ -301,7 +301,7 @@ class MobileController < ApplicationController
 			end
 		else
 			id= params[:id]
-			extension = File.extname(params[:image].original_filename).downcase
+			extension = File.extname(params[:picture].original_filename).downcase
 			if (extension != "png" && extension != "jpeg" && extension != "jpg")
 				json = {'success' => false , 'errorcode' => 3}
 				respond_to do |format|
@@ -309,20 +309,17 @@ class MobileController < ApplicationController
 					format.json { render json: json}
 				end
 			else
-				puts "sono qui"
-				logger.info "blah"
-				p "asd"
-				Rails.logger.debug("debug::" + params[:image].original_filename)
-				uploaded_io = params[:image].tmpfile
-				puts("sono qui 2")
-				Rails.logger.debug("debug::" + params[:image].original_filename)
-			  File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
+				f1=Friend.find(id)
+				f1.picture = params[:picture]
+				f1.update_attributes(:picture => params[:picture])
+				
+				uploaded_io = params[:picture].tmpfile
+				File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:picture].original_filename), 'w') do |file|
 			    file.write(uploaded_io.read)
 			    file.close
 			  end
 			  if(incrementImageNumber(id))
-			  	puts("sono qui 3")
-			  	Rails.logger.debug("debug::" + params[:image].original_filename)
+			  	
 				  json = {'success' => true , 'errorcode' => 0}
 					respond_to do |format|
 						format.html { render json: json}
