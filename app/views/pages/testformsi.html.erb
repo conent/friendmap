@@ -1,4 +1,4 @@
-<%= form_tag("/friends", method: "PUT", :multipar => true) do %>
+<%= form_tag("/uploadimage", method: "POST", :multipar => true) do %>
   <%= label_tag(:id, "id") %>
   <%= text_field_tag(:id) %>
 
@@ -6,7 +6,7 @@
   <%= text_field_tag(:name) %>
 
   <p><label for="upload_file">Select File</label> : 
-	<%= file_field ':image', 'datafile' %></p>
+	<%= file_field ':picture', 'datafile' %></p>
 
   <%= submit_tag("gogogogo") %>
 <% end %>
