@@ -19,7 +19,7 @@ Friendmap::Application.routes.draw do
   match "/signin" => "mobile#signin", :via => :post
   match "/signup" => "mobile#signup", :via => :post
   match "/updateinfo" => "mobile#updateInfo", :via => :post
-  match "/uploadimage" => "mobile#uploadImage", :via => :post
+  match "/uploadimage" => "mobile#uploadImage", :via => :put
     
   
 
