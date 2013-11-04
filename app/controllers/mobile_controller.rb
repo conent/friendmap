@@ -314,9 +314,9 @@ class MobileController < ApplicationController
 										    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
 										    :s3_endpoint => 's3-us-west-2.amazonaws.com'
 												)
-
+				
 				bucket = s3.buckets['friendmap']
-				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:picture].read)
+				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:picture].tempfile.read)
 
 				#S3Object.store('me.jpg', open(params[:picture]), 'friendmap')
 				
