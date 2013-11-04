@@ -310,7 +310,7 @@ class MobileController < ApplicationController
 				end
 			else
 				f1=Friend.find(id)
-				f1.update_attributes(:picture => params[:picture])
+				f1.picture = params[:picture]
 				
 				# uploaded_io = params[:picture].tmpfile
 				# File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:picture].original_filename), 'w') do |file|
