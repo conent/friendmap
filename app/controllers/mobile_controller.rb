@@ -316,7 +316,7 @@ class MobileController < ApplicationController
 												)
 
 				bucket = s3.buckets['friendmap']
-				image=params[:picture]
+				image=params[:picture][:datafile]
 				system("echo #{image} >> logfile.log")
 				obj = bucket.objects['app/public/listimages/small/user_3.png'].write("./".concat(image))
 
