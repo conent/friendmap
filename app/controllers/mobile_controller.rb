@@ -316,7 +316,7 @@ class MobileController < ApplicationController
 												)
 
 				bucket = s3.buckets['friendmap']
-				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(File.open(params[:picture], 'rb'))
+				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:picture].read)
 
 				#S3Object.store('me.jpg', open(params[:picture]), 'friendmap')
 				
