@@ -316,7 +316,7 @@ class MobileController < ApplicationController
 												)
 				f1=Friend.find(id)
 				uploaded_io = params[:picture]
-				f1.picture = uploaded_io.tempfile
+				f1.picture = @tempfile
 				
 
 				#S3Object.store('me.jpg', open(params[:picture]), 'friendmap')
