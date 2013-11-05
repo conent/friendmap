@@ -315,13 +315,15 @@ class MobileController < ApplicationController
 										    :s3_endpoint => 's3-us-west-2.amazonaws.com'
 												)
 				
+				image = params[:image]
 
 				bucket = s3.buckets['friendmap']
-				small=params[:image]
+				small= image
 				obj = bucket.objects['app/public/listimages/small/user_#{id}.png'].write(small.read)
 
-				medium=params[:image]
-				medium.manipulate!(resize: "256x256")
+
+				medium = MiniMagick::Image.open(image)
+				medium.resize "256x256"
 				obj = bucket.objects['app/public/listimages/medium/user_#{id}.png'].write(medium.read)
 
 
