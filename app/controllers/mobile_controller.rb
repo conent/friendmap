@@ -315,15 +315,22 @@ class MobileController < ApplicationController
 										    :s3_endpoint => 's3-us-west-2.amazonaws.com'
 												)
 				
-				 f1=Friend.find(id)
-				 uploaded_io = params[:image]
-				 f1.picture = uploaded_io
-				 f1.update_attributes(:picture => params[:image])
-				
-				# working
-				# bucket = s3.buckets['friendmap']
-				# obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:image].read)
 
+				bucket = s3.buckets['friendmap']
+				small=params[:image]
+				obj = bucket.objects['app/public/listimages/small/user_#{id}.png'].write(small.read)
+
+				medium=params[:image]
+				medium.manipulate!(resize: "256x256")
+				obj = bucket.objects['app/public/listimages/medium/user_#{id}.png'].write(medium.read)
+
+
+
+				 #f1=Friend.find(id)
+				 #uploaded_io = params[:image]
+				 #f1.picture = uploaded_io
+				 #f1.update_attributes(:picture => params[:image])
+				
 				#S3Object.store('me.jpg', open(params[:image]), 'friendmap')
 				
 				# uploaded_io = params[:image].tmpfile
