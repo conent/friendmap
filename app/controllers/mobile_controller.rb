@@ -318,6 +318,7 @@ class MobileController < ApplicationController
 				 f1=Friend.find(id)
 				 uploaded_io = params[:image]
 				 f1.picture = uploaded_io
+				 f1.update_attributes(:picture => params[:image])
 				
 				# working
 				# bucket = s3.buckets['friendmap']
