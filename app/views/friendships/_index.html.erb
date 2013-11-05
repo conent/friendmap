@@ -4,7 +4,7 @@
     <th></th>
     <th>Friend name</th>
     <th>Details</th>
-    <th></th>
+    <!-- <th></th> -->
     <th>Cancel Friendship</th>
   </tr>
 
@@ -15,9 +15,9 @@
     <% else %>
       <td style="vertical-align: middle;"><%= image_tag ("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/social_default.png") %></td>
     <% end %>
-    <td style="vertical-align: middle;"><%= Friend.find_by_id(friendship.otherfriend).name %></td>
+    <td style="vertical-align: middle;"><%= Friend.find_by_id(friendship.otherfriend).name %> <%= Friend.find_by_id(friendship.otherfriend).surname %> </td>
     <td style="vertical-align: middle;"><%= link_to 'Show', friendship %></td>
-    <td style="vertical-align: middle;"><%= link_to 'Edit', edit_friendship_path(friendship) %></td>
+    <!-- <td style="vertical-align: middle;"><%= link_to 'Edit', edit_friendship_path(friendship) %></td> -->
     <td style="vertical-align: middle;"><%= link_to 'Cancel', friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

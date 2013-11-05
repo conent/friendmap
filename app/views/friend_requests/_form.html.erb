@@ -1,11 +1,13 @@
 <%= simple_form_for(@friend_request) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :otherfriend, as: :email, label: "Your friend\'s email address"  %>
-  </div>
+  <div class="span4 offset4">
+	  <div class="form-inputs">
+	    <%= f.input :otherfriend, as: :email, label: "Your friend\'s email address"  %>
+	  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+	  <div class="form-actions">
+	    <%= f.button :submit %>
+	  </div>
+	</div>
 <% end %>

@@ -1,11 +1,13 @@
 <%= simple_form_for(@friendship) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :otherfriend %>
-  </div>
+  <div class="span4 offset4">
+	  <div class="form-inputs">
+	    <%= f.input :otherfriend %>
+	  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+	  <div class="form-actions">
+	    <%= f.button :submit %>
+	  </div>
+	</div>
 <% end %>
