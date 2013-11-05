@@ -326,12 +326,12 @@ class MobileController < ApplicationController
 				medium = MiniMagick::Image.open(image.path)
 				medium.resize "256x256"
 				medium.write("medium.png")
-				obj = bucket.objects['app/public/listimages/medium/'.concat(name)].write(medium.read)
+				obj = bucket.objects['app/public/listimages/medium/'.concat(name)].write("medium.png")
 
 				navbar = MiniMagick::Image.open(image.path)
 				navbar.resize "35x35"
 				navbar.write("navbar.png")
-				obj = bucket.objects['app/public/listimages/navbar/'.concat(name)].write(nabar.read)
+				obj = bucket.objects['app/public/listimages/navbar/'.concat(name)].write("navbar.png")
 
 
 				 #f1=Friend.find(id)
