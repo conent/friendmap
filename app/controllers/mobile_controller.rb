@@ -315,15 +315,18 @@ class MobileController < ApplicationController
 										    :s3_endpoint => 's3-us-west-2.amazonaws.com'
 												)
 				
+				# f1=Friend.find(id)
+				# uploaded_io = params[:image]
+				# f1.picture = uploaded_io
 				
 				
 				bucket = s3.buckets['friendmap']
-				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:picture].read)
+				obj = bucket.objects['app/public/listimages/small/user_3.png'].write(params[:image].read)
 
-				#S3Object.store('me.jpg', open(params[:picture]), 'friendmap')
+				#S3Object.store('me.jpg', open(params[:image]), 'friendmap')
 				
-				# uploaded_io = params[:picture].tmpfile
-				# File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:picture].original_filename), 'w') do |file|
+				# uploaded_io = params[:image].tmpfile
+				# File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
 			    # file.write(uploaded_io.read)
 			    # file.close
 			  #end
