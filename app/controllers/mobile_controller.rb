@@ -321,7 +321,7 @@ class MobileController < ApplicationController
 				small= image
 				obj = bucket.objects['app/public/listimages/small/user_#{id}.png'].write(small.read)
 
-
+				require mini_magick
 				medium = MiniMagick::Image.open(image)
 				medium.resize "256x256"
 				obj = bucket.objects['app/public/listimages/medium/user_#{id}.png'].write(medium.read)
