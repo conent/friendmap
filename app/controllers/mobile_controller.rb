@@ -319,7 +319,8 @@ class MobileController < ApplicationController
 
 				bucket = s3.buckets['friendmap']
 				small= image
-				obj = bucket.objects['app/public/listimages/small/user_#{id}.png'].write(small.read)
+				name = "user_".concat(id.to_s).concat(".png")
+				obj = bucket.objects['app/public/listimages/small/'.concat(name)].write(small.read)
 
 				require mini_magick
 				medium = MiniMagick::Image.open(image)
