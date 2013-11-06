@@ -7,6 +7,8 @@ gem 'faker'
 gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'mini_magick', '3.5.0'
+gem 'geocoder'
+gem 'gmaps4rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

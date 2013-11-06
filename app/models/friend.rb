@@ -11,6 +11,19 @@ class Friend < ActiveRecord::Base
   # validate
   validates :surname, :name, :email, :password, :password_confirmation, presence: true, :on => :create
 
+  #GECODER
+  reverse_geocoded_by :latitude, :longitude,
+  :address => :location
+  after_validation :reverse_geocode, :if => lambda{ |obj| obj.location_changed? }
+  # or after_validation :reverse_geocode, :if => lambda{ |obj| obj.address_changed? }
+
+
+
+
+
+
+
+  #PAPERCLIP
   # attr_accessible :title, :body
 
   has_attached_file :picture, styles: { medium: "256x256>", small: "128x128>", navbar: "35x35>"},
@@ -25,6 +38,7 @@ class Friend < ActiveRecord::Base
   Paperclip.interpolates :normalized_picture_file_name do |attachment, style|
     attachment.instance.normalized_picture_file_name
   end
+
 
   def normalized_picture_file_name
     "user_#{self.id}"

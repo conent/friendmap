@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023093832) do
+ActiveRecord::Schema.define(:version => 20131106115957) do
 
   create_table "friend_requests", :force => true do |t|
     t.integer  "otherfriend"
@@ -38,15 +38,16 @@ ActiveRecord::Schema.define(:version => 20131023093832) do
     t.string   "name"
     t.string   "surname"
     t.string   "isonline"
-    t.integer  "datanumber",             :default => 0,  :null => false
-    t.integer  "imagenumber",            :default => 0,  :null => false
+    t.integer  "datanumber"
+    t.integer  "imagenumber"
     t.datetime "lastseen"
-    t.float    "latitude",               :default => 0,  :null => false
-    t.float    "longitude",              :default => 0,  :null => false
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string   "location"
   end
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true

@@ -59,6 +59,8 @@ GEM
     execjs (2.0.2)
     faker (1.2.0)
       i18n (~> 0.5)
+    geocoder (1.1.8)
+    gmaps4rails (2.0.4)
     hike (1.2.3)
     i18n (0.6.1)
     journey (1.0.4)
@@ -148,6 +150,8 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   faker
+  geocoder
+  gmaps4rails
   jquery-rails
   mini_magick (= 3.5.0)
   paperclip (~> 3.0)
