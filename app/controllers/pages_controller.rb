@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   	@pending_requests = FriendRequest.where("otherfriend= ?", current_friend)
   	string = ""
   	#TODO: change false into true
-    friendsOnline= Friend.where("isonline == false and latitude != 0 and longitude != 0")
+    friendsOnline= Friend.where("isonline = ? and latitude != ? and longitude != ?", "false", 0, 0)
   	@hash = Gmaps4rails.build_markers(friendsOnline) do |friend, marker|
 	    if ((friend.latitude != nil && friend.longitude != nil) && !(friend.latitude == 0 && friend.longitude == 0))
 	      marker.lat friend.latitude
