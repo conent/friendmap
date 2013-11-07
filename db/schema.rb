@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106115957) do
+ActiveRecord::Schema.define(:version => 20131107150714) do
 
   create_table "friend_requests", :force => true do |t|
     t.integer  "otherfriend"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20131106115957) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
-    t.string   "location"
+    t.string   "address"
   end
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true

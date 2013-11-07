@@ -6,15 +6,14 @@ class Friend < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :fid,
-  					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude, :picture
+  					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude, :picture, :address
   
   # validate
   validates :surname, :name, :email, :password, :password_confirmation, presence: true, :on => :create
 
-  #GECODER
-  reverse_geocoded_by :latitude, :longitude,
-  :address => :location
-  after_validation :reverse_geocode, :if => lambda{ |obj| obj.location_changed? }
+  #GEOCODER
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode, :if => lambda{ |obj| obj.latitude_changed? }
   # or after_validation :reverse_geocode, :if => lambda{ |obj| obj.address_changed? }
 
 
