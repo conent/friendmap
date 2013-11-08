@@ -11,10 +11,10 @@ module Paperclip
     def make  
       @file.rewind # move pointer back to start of file in case handled by other processors
       first_image = MiniMagick::Image.open "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarker.png"
-      second_image = MiniMagick::Image.open @file.path
+      second_image = MiniMagick::Image.open "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/navbar/user_1.png" #@file.path if resized
       result = first_image.composite(second_image) do |c|
         c.compose "Over" # OverCompositeOp
-        c.geometry "+20+20" # copy second_image onto first_image from (20, 20)
+        c.geometry "+2+2" # copy second_image onto first_image from (2, 2)
       end
       result.write @file.path
       
