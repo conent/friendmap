@@ -25,7 +25,7 @@ module Paperclip
       # @file = tmp
               
                  
-        @file
+      @file
       
     end
   end
