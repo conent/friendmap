@@ -9,15 +9,12 @@ module Paperclip
     end
 
     def make  
-      tmp = Tempfile.new("background.png")
       @file.rewind # move pointer back to start of file in case handled by other processors
       first_image = MiniMagick::Image.open "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarker.png"
       first_image.resize "36x36"
-      first_image.write tmp.path
-      background = MiniMagick::Image.open tmp.path
       second_image = MiniMagick::Image.open @file.path #@file.path if resized
       second_image.resize "33x33"
-      result = background.composite(second_image) do |c|
+      result = first_image.composite(second_image) do |c|
         c.compose "Over" # OverCompositeOp
         c.geometry "+1+1" # copy second_image onto first_image from (2, 2)
       end
