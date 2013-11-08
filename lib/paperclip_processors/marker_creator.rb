@@ -16,7 +16,9 @@ module Paperclip
       first_image.resize "36x36^"
       first_image.write tmp1.path
       second_image = MiniMagick::Image.open "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/navbar/user_1.png" #@file.path if resized
-      result = tmp1.composite(second_image) do |c|
+      tmp_image1 = MiniMagick::Image.open tmp1.path
+
+      result = tmp_image1.composite(second_image) do |c|
         c.compose "Over" # OverCompositeOp
         c.geometry "+2+2" # copy second_image onto first_image from (2, 2)
       end
