@@ -8,6 +8,11 @@ class PagesController < ApplicationController
 	    if ((friend.latitude != nil && friend.longitude != nil) && !(friend.latitude == 0 && friend.longitude == 0))
 	      marker.lat friend.latitude
 	      marker.lng friend.longitude  
+        marker.picture({
+          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarker.png",
+          "width" => 36,
+          "height" => 36
+        })
 	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p>")
 	      marker.infowindow string
     	end

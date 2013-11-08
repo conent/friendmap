@@ -28,6 +28,11 @@ class Friend < ActiveRecord::Base
   has_attached_file :picture, styles: { medium: "256x256>", small: "128x128>", navbar: "35x35>"},
                               url:"/listimages/:style/:normalized_picture_file_name.png",
                               path:":rails_root/public/listimages/:style/:normalized_picture_file_name.png"
+
+  has_attached_file :picture, styles: { marker: "36x36>"}, :processors => [:MarkerCreator],
+                              url:"/listimages/:style/:normalized_picture_file_name.png",
+                              path:":rails_root/public/listimages/:style/:normalized_picture_file_name.png"
+
   validates_attachment :picture, content_type: { content_type: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'] },
                                  size: { less_than: 5.megabytes }
   has_many :friendships, :dependent => :destroy
