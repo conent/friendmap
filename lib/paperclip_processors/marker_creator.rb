@@ -5,7 +5,6 @@ module Paperclip
       @file           = file
       @options        = options
       @instance       = attachment.instance
-      @current_format = File.extname(attachment.instance.asset_file_name)
       @basename       = File.basename(@file.path, @current_format)
       @whiny          = options[:whiny].nil? ? true : options[:whiny]
     end
