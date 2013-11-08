@@ -15,7 +15,7 @@ module Paperclip
 
       result = first_image.composite(second_image) do |c|
         c.compose "Over" # OverCompositeOp
-        c.geometry "+2+2" # copy second_image onto first_image from (2, 2)
+        c.geometry "+1+1" # copy second_image onto first_image from (2, 2)
       end
       result.write @file.path
       
