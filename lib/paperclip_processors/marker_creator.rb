@@ -27,7 +27,7 @@ module Paperclip
             c.compose "Over" # OverCompositeOp
             c.geometry "+20+20" # copy second_image onto first_image from (20, 20)
           end
-          result.write @file
+          result.write @file.path
         
           tmp = Tempfile.new([@basename, @current_format].compact.join("."))
           tmp << file_content
