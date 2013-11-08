@@ -29,9 +29,9 @@ module Paperclip
           end
           result.write @file.path
         
-          tmp = Tempfile.new([@basename, @current_format].compact.join("."))
-          tmp << file_content
-          tmp.flush 
+          # tmp = Tempfile.new([@basename, @current_format].compact.join("."))
+          # tmp << file_content
+          # tmp.flush 
          # @file = tmp
               
                  
