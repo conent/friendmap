@@ -10,7 +10,7 @@ module Paperclip
 
     def make  
       @file.rewind # move pointer back to start of file in case handled by other processors
-      first_image = MiniMagick::Image.open "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarkersmall.png"
+      first_image = MiniMagick::Image.open "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarker.png"
       second_image = MiniMagick::Image.open @file.path #@file.path if resized
       second_image.resize "33x33"
       result = first_image.composite(second_image) do |c|
