@@ -25,7 +25,7 @@ class Friend < ActiveRecord::Base
   #PAPERCLIP
   # attr_accessible :title, :body
 
-  has_attached_file :picture, styles: { medium: "256x256>", small: "128x128>", navbar: "35x35>"},
+  has_attached_file :picture, styles: { medium: "256x256>", small: "128x128>", navbar: "35x35>", micro: "25x25>"},
                               url:"/listimages/:style/:normalized_picture_file_name.png",
                               path:":rails_root/public/listimages/:style/:normalized_picture_file_name.png"
 
