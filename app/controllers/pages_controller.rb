@@ -9,17 +9,17 @@ class PagesController < ApplicationController
 	      marker.lat friend.latitude
 	      marker.lng friend.longitude
         lasturl = ""
-        if (friend.picture.exists?)
+        if (!friend.picture.exists?)
+          marker.picture({
+          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/mapmarkerdefault.png",
+          "width" => 30,
+          "height" => 40
+          })          
+        else
           filename = "user_".concat(friend.id).concat(".png")
           lasturl = "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/".concat(filename)
           marker.picture({
           "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/".concat(filename),
-          "width" => 30,
-          "height" => 40
-          })
-        else
-          marker.picture({
-          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/mapmarkerdefault.png",
           "width" => 30,
           "height" => 40
           })
