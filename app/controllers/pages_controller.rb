@@ -9,9 +9,9 @@ class PagesController < ApplicationController
 	      marker.lat friend.latitude
 	      marker.lng friend.longitude
         if (friend.picture.exists?)
-          filename = "user_".concat(friend.id).concat(".png")
+          filename = "user_".concat(friend.id.to_s).concat(".png")
           marker.picture({
-          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/user_".concat(friend.id).concat(".png"),
+          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/user_".concat(friend.id.to_s).concat(".png"),
           "width" => 30,
           "height" => 40
           })
@@ -23,7 +23,7 @@ class PagesController < ApplicationController
           })
         end
 
-	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p> friendid=").concat(friend.id)
+	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p> friendid=").concat(friend.id.to_s)
 	      marker.infowindow string
     	end
 	  end
