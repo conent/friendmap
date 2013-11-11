@@ -335,7 +335,7 @@ class MobileController < ApplicationController
 				obj = bucket.objects['app/public/listimages/navbar/'.concat(name)].write(:file =>"navbar.png")
 
 				#marker creation
-				src = image.path
+				src = image
 	      marker = Tempfile.new(["user_".concat(id.to_s), ".png"])
 	      marker.binmode
 	 
@@ -356,8 +356,8 @@ class MobileController < ApplicationController
 		    end
 	 
 	      marker.resize "36x36"
-	      marker.write("navbar.png")
-				obj = bucket.objects['app/public/listimages/navbar/'.concat(name)].write(:file =>"navbar.png")
+	      marker.write("marker.png")
+				obj = bucket.objects['app/public/listimages/marker/'.concat(name)].write(:file =>"marker.png")
 
 
 			  if(incrementImageNumber(id))
