@@ -5,7 +5,7 @@ class Friend < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :fid,
+  attr_accessible :email, :password, :password_confirmation, :id,
   					:remember_me, :name, :surname, :isonline, :datanumber, :imagenumber, :lastseen, :latitude, :longitude, :picture, :address
   
   # validate
