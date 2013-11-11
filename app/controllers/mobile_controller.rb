@@ -355,7 +355,7 @@ class MobileController < ApplicationController
 		      raise PaperclipError, "There was an error during the marker creation for #{@basename}" if @whiny
 		    end
 
-				obj = bucket.objects['app/public/listimages/marker/'.concat(name)].write(:file =>"marker.png")
+				obj = bucket.objects['app/public/listimages/marker/'.concat(name)].write(:file => marker.path)
 
 
 			  if(incrementImageNumber(id))
