@@ -327,7 +327,7 @@ class MobileController < ApplicationController
 				medium = MiniMagick::Image.open(image.path)
 				medium.resize "256x256"
 				medium.write("medium.png")
-				obj = bucket.objects['app/public/listimages/medium/'.concat(name)].write(Pathname.new("./medium.png"))
+				obj = bucket.objects['app/public/listimages/medium/'.concat(name)].write(:file =>"medium.png")
 
 				navbar = MiniMagick::Image.open(image.path)
 				navbar.resize "35x35"
@@ -336,7 +336,7 @@ class MobileController < ApplicationController
 
 				#marker creation
 				src = image
-	      marker = Tempfile.new(["user_".concat(id.to_s), ".png"])
+	      marker = Tempfile.new(["marker", ".png"])
 	      marker.binmode
 	 
 	      begin
@@ -354,14 +354,11 @@ class MobileController < ApplicationController
 		    rescue PaperclipCommandLineError => e
 		      raise PaperclipError, "There was an error during the marker creation for #{@basename}" if @whiny
 		    end
-	 
-	      marker.resize "36x36"
-	      marker.write("marker.png")
+
 				obj = bucket.objects['app/public/listimages/marker/'.concat(name)].write(:file =>"marker.png")
 
 
 			  if(incrementImageNumber(id))
-			  	
 				  json = {'success' => true , 'errorcode' => 0}
 					respond_to do |format|
 						format.html { render json: json}
