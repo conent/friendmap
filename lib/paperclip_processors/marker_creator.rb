@@ -43,7 +43,7 @@ module Paperclip
         # parameters << 'on'
         # parameters << '-compose'
         # parameters << 'CopyOpacity'
-         parameters << '-geometry 24x24+1+1'
+         parameters << '-geometry 24x24+3+3'
          parameters << '-composite'
          parameters << ':dest'
 
