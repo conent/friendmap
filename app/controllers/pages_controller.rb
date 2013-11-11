@@ -23,8 +23,7 @@ class PagesController < ApplicationController
           })
         end
 
-	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p>").concat(lasturl)
-	      marker.infowindow string
+	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p>")
     	end
 	  end
   end
