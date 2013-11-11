@@ -8,18 +8,16 @@ class PagesController < ApplicationController
 	    if ((friend.latitude != nil && friend.longitude != nil) && !(friend.latitude == 0 && friend.longitude == 0))
 	      marker.lat friend.latitude
 	      marker.lng friend.longitude
-        lasturl = ""
-        if (!friend.picture.exists?)
+        if (friend.picture.exists?)
+          filename = "user_".concat(friend.id).concat(".png")
           marker.picture({
-          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/mapmarkerdefault.png",
+          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/user_1.png",
           "width" => 30,
           "height" => 40
-          })          
+          })
         else
-          filename = "user_".concat(friend.id).concat(".png")
-          lasturl = "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/".concat(filename)
           marker.picture({
-          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/".concat(filename),
+          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/mapmarkerdefault.png",
           "width" => 30,
           "height" => 40
           })
