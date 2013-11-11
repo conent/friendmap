@@ -48,8 +48,8 @@ module Paperclip
  
         parameters = parameters.flatten.compact.join(" ").strip.squeeze(" ")
  
-        mask_path = File.expand_path('https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarkersmall.png')
-        success = Paperclip.run("convert", parameters, :source => "#{File.expand_path(src.path)}[0]", :mask => "#{mask_path}[0]", :dest => File.expand_path(dst.path))
+        #mask_path = File.expand_path('https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarkersmall.png')
+        success = Paperclip.run("convert", parameters, :source => "#{File.expand_path(src.path)}[0]", :mask => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarkersmall.png[0]", :dest => File.expand_path(dst.path))
        
  
  
