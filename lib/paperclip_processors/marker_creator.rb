@@ -37,15 +37,16 @@ module Paperclip
       begin
         parameters = []
          
-        parameters << ':source'
-        parameters << ':mask'
-        parameters << '-alpha'
-        parameters << 'on'
-        parameters << '-compose'
-        parameters << 'CopyOpacity'
-        parameters << '-composite'
-        parameters << ':dest'
- 
+         parameters << ':source'
+         parameters << ':mask'
+        # parameters << '-alpha'
+        # parameters << 'on'
+        # parameters << '-compose'
+        # parameters << 'CopyOpacity'
+         parameters << 'composite'
+         parameters << '-geometry +5+10'
+         parameters << ':dest'
+
         parameters = parameters.flatten.compact.join(" ").strip.squeeze(" ")
  
         #mask_path = File.expand_path('https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarkersmall.png')
