@@ -334,19 +334,32 @@ class MobileController < ApplicationController
 				navbar.write("navbar.png")
 				obj = bucket.objects['app/public/listimages/navbar/'.concat(name)].write(:file =>"navbar.png")
 
+				#marker creation
+				src = image.path
+	      marker = Tempfile.new(["user_".concat(id.to_s), ".png"])
+	      marker.binmode
+	 
+	      begin
+	        parameters = []
+	         
+	        parameters << ':background'
+	        parameters << ':source'
+	        parameters << '-geometry 24x24+3+3'
+	        parameters << '-composite'
+	        parameters << ':dest'
 
-				 #f1=Friend.find(id)
-				 #uploaded_io = params[:image]
-				 #f1.picture = uploaded_io
-				 #f1.update_attributes(:picture => params[:image])
-				
-				#S3Object.store('me.jpg', open(params[:image]), 'friendmap')
-				
-				# uploaded_io = params[:image].tmpfile
-				# File.open("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/".concat(params[:image].original_filename), 'w') do |file|
-			    # file.write(uploaded_io.read)
-			    # file.close
-			  #end
+	        parameters = parameters.flatten.compact.join(" ").strip.squeeze(" ")
+	 				success = Paperclip.run("convert", parameters, :source => "#{File.expand_path(src.path)}[0]", :background => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/original/mapmarkersmall.png[0]", :dest => File.expand_path(marker.path))
+		       
+		    rescue PaperclipCommandLineError => e
+		      raise PaperclipError, "There was an error during the marker creation for #{@basename}" if @whiny
+		    end
+	 
+	      marker.resize "36x36"
+	      marker.write("navbar.png")
+				obj = bucket.objects['app/public/listimages/navbar/'.concat(name)].write(:file =>"navbar.png")
+
+
 			  if(incrementImageNumber(id))
 			  	
 				  json = {'success' => true , 'errorcode' => 0}
