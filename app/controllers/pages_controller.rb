@@ -11,7 +11,7 @@ class PagesController < ApplicationController
         if (friend.picture.exists?)
           filename = "user_".concat(friend.id.to_s).concat(".png")
           marker.picture({
-          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/user_".concat(friend.id.to_s).concat(".png"),
+          "url" => "https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/marker/".concat(filename),
           "width" => 30,
           "height" => 40
           })
@@ -23,7 +23,7 @@ class PagesController < ApplicationController
           })
         end
 
-	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p> friendid=").concat(friend.id.to_s)
+	      string = "<p>".concat(friend.name).concat(" ").concat(friend.surname).concat("</p> <p>").concat(friend.address).concat("</p>")
 	      marker.infowindow string
     	end
 	  end

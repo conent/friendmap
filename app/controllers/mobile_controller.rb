@@ -609,7 +609,7 @@ class MobileController < ApplicationController
 												"longitude" => longitude,
 												"lastseen" => Time.now,
 												"isonline" => "true"}
-			friend.update_attributes(submission_hash) # HOPE
+			friend.update_attributes(submission_hash) 
 		end
 
 				

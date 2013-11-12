@@ -4,16 +4,27 @@
   <tr>
     <th></th>
     <th>Friend name</th>
-    <th>Is online</th>
+    <th>Location</th>
     <th>Friend email</th>
     <th>Last time online</th>
   </tr>
   <tr>
-    <td><%= image_tag Friend.find(@friendship.otherfriend).picture.url(:small) %></td>
-    <td><%= Friend.find(@friendship.otherfriend).name %></th>
-    <td><%= Friend.find(@friendship.otherfriend).isonline %></th>
-    <td><%= Friend.find(@friendship.otherfriend).email %></th>
-    <td><%= Friend.find(@friendship.otherfriend).lastseen %></th>
+    <td>
+      <% if Friend.find(@friendship.otherfriend).picture.exists? %>
+        <%= image_tag Friend.find(@friendship.otherfriend).picture.url(:small) %></td>
+      <% else %>
+        <%= image_tag ("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/small/social_default.png") %></td>
+      <% end %>
+    <td><%= Friend.find(@friendship.otherfriend).name %></td>
+    <td>
+      <% if Friend.find(@friendship.otherfriend).isonline %>
+        <%= Friend.find(@friendship.otherfriend).location %>
+      <% else %>
+        Offline
+      <% end %>
+    </td>
+    <td><%= Friend.find(@friendship.otherfriend).email %></td>
+    <td><%= Friend.find(@friendship.otherfriend).lastseen %></td>
   </tr>
 
 <!--<%= link_to 'Edit', edit_friendship_path(@friendship) %> | -->

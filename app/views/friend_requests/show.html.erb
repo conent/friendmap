@@ -4,7 +4,7 @@
 
 <p>
   <b>Otherfriend:</b>
-  <%= @friend_request.otherfriend %>
+  <%= @friend_request.friend_id %>
 </p>
 <table class="table table-striped">
   <tr>
@@ -14,8 +14,8 @@
     <th></th>
   </tr>
   <tr>
-    <td><%= Friend.find_by_id(@friend_request.otherfriend).name %> <%= Friend.find_by_id(@friend_request.otherfriend).surname %></td>
-    <td><%= Friend.find_by_id(@friend_request.otherfriend).email %></td>
+    <td><%= Friend.find_by_id(@friend_request.friend_id).name %> <%= Friend.find_by_id(@friend_request.friend_id).surname %></td>
+    <td><%= Friend.find_by_id(@friend_request.friend_id).email %></td>
     <td><%= @friend_request.created_at %></td>
   </tr>
 
