@@ -11,41 +11,28 @@
 <p>
     <%= link_to "Sign Up Now!", new_friend_registration_path, class: "btn btn-primary btn-large" %>
 </p>
-
   <div id="map" style='width: 800px; height: 400px;'>
   </div>
 
 
-<script type="text/javascript">
-function setMarkers(){
-	handler = Gmaps.build('Google');
-	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-	  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-	  //mypos= addMarker(data, options);
-	  handler.bounds.extendWith(markers);
-	  handler.fitMapToBounds();
-	  handler.map.centerOn({ lat: 40, lng: 5 });
-	});
-}
-setMarkers();
 
-</script>
-<script>
-var x=document.getElementById("demo");
+<script type="text/javascript">
+var mylat= 0;
+var mylng= 0;
+
 function getLocation()
   {
   if (navigator.geolocation)
     {
     navigator.geolocation.getCurrentPosition(showPosition,showError);
     }
-  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  else{alert("Geolocation is not supported by this browser.");}
   }
 
 function showPosition(position)
   {
-  var latlon=position.coords.latitude+","+position.coords.longitude;
-
-  //alert(latlon);
+  mylat= position.coords.latitude;
+  mylng= position.coords.longitude;
   }
 
 function showError(error)
@@ -53,20 +40,36 @@ function showError(error)
   switch(error.code) 
     {
     case error.PERMISSION_DENIED:
-      x.innerHTML="User denied the request for Geolocation."
+      alert("User denied the request for Geolocation.");
       break;
     case error.POSITION_UNAVAILABLE:
-      x.innerHTML="Location information is unavailable."
+      alert("Location information is unavailable.");
       break;
     case error.TIMEOUT:
-      x.innerHTML="The request to get user location timed out."
+      alert("The request to get user location timed out.");
       break;
     case error.UNKNOWN_ERROR:
-      x.innerHTML="An unknown error occurred."
+      alert("An unknown error occurred.");
       break;
     }
   }
-  window.onload = getLocation();
+
+function setMarkers(){
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(10);
+    //mypos= addMarker(data, options);
+    handler.map.centerOn({ lat: mylat, lng: mylng });
+  });
+}
+
 </script>
 
+<script type="text/javascript">
+getLocation();
+setTimeout(function() {setMarkers()},'1000');
+</script>
 <!-- <%= session.inspect %> -->
