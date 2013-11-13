@@ -5,71 +5,101 @@
 <%- content_for(:head) do -%>
 <%- end -%>
 
-<h1>Pages#home</h1>
-<p>here will be a map if user is loged in otherwise a "what is friendmap?" page</p>
 
-<p>
-    <%= link_to "Sign Up Now!", new_friend_registration_path, class: "btn btn-primary btn-large" %>
-</p>
-  <div id="map" style='width: 800px; height: 400px;'>
+<% if friend_signed_in? %> <!-- user signed in -->
+  <div class = "row-fluid">
+    <div class= "span9" id="map" style='height: 400px;'>
+    </div>
+    <div class= "span3" id="online-list">
+      <table class="table table-striped">
+        <tr>
+          <th></th>
+          <th>Friend name</th>
+          <th>Location</th>
+        </tr>
+
+      <% current_friend.friendships.all.each do |friendship| %>
+        <% if Friend.find(friendship.otherfriend).isonline == "true" %>
+          <tr>
+            <% if Friend.find(friendship.otherfriend).picture.exists? %>
+              <td style="vertical-align: middle;"><%= image_tag Friend.find(friendship.otherfriend).picture.url(:navbar) %></td>
+            <% else %>
+              <td style="vertical-align: middle;"><%= image_tag ("https://s3-us-west-2.amazonaws.com/friendmap/app/public/listimages/navbar/social_default.png") %></td>
+            <% end %>
+            <td style="vertical-align: middle;"><%= Friend.find_by_id(friendship.otherfriend).name %> <%= Friend.find_by_id(friendship.otherfriend).surname %> </td>
+            <td style="vertical-align: middle;"><%= Friend.find_by_id(friendship.otherfriend).address %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </table>
+    </div>
   </div>
 
+  <script type="text/javascript">
+  var mylat= 0;
+  var mylng= 0;
 
-
-<script type="text/javascript">
-var mylat= 0;
-var mylng= 0;
-
-function getLocation()
-  {
-  if (navigator.geolocation)
+  function getLocation()
     {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
+    if (navigator.geolocation)
+      {
+      navigator.geolocation.getCurrentPosition(showPosition,showError);
+      }
+    else{alert("Geolocation is not supported by this browser.");}
     }
-  else{alert("Geolocation is not supported by this browser.");}
-  }
 
-function showPosition(position)
-  {
-  mylat= position.coords.latitude;
-  mylng= position.coords.longitude;
-  }
-
-function showError(error)
-  {
-  switch(error.code) 
+  function showPosition(position)
     {
-    case error.PERMISSION_DENIED:
-      alert("User denied the request for Geolocation.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      alert("Location information is unavailable.");
-      break;
-    case error.TIMEOUT:
-      alert("The request to get user location timed out.");
-      break;
-    case error.UNKNOWN_ERROR:
-      alert("An unknown error occurred.");
-      break;
+    mylat= position.coords.latitude;
+    mylng= position.coords.longitude;
     }
+
+  function showError(error)
+    {
+    switch(error.code) 
+      {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+      }
+    }
+
+  function setMarkers(){
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(10);
+      //mypos= addMarker(data, options);
+      handler.map.centerOn({ lat: mylat, lng: mylng });
+    });
   }
 
-function setMarkers(){
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(10);
-    //mypos= addMarker(data, options);
-    handler.map.centerOn({ lat: mylat, lng: mylng });
-  });
-}
+  </script>
 
-</script>
+  <script type="text/javascript">
+  getLocation();
+  setTimeout(function() {setMarkers()},'1000');
+  </script>
+  
+<% else %> <!-- user not signed in -->
+  <h1>Pages#home</h1>
+  <p>here will be a map if user is loged in otherwise a "what is friendmap?" page</p>
+  <p>
+      <%= link_to "Sign Up Now!", new_friend_registration_path, class: "btn btn-primary btn-large" %>
+  </p>
 
-<script type="text/javascript">
-getLocation();
-setTimeout(function() {setMarkers()},'1000');
-</script>
+    
+<% end %>
+
 <!-- <%= session.inspect %> -->
