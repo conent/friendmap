@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'devise'
 gem 'simple_form'
-gem 'faker'
+#gem 'faker'
 gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'mini_magick', '3.5.0'
